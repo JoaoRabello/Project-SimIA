@@ -1,14 +1,16 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SurvivalControllers
+namespace SurvivalManagers
 {
-    public class HungerController : MonoBehaviour
+    public class NutritionManager : MonoBehaviour
     {
+        private CameraController cameraController;
+
         [Header("Attributes")]
-        [SerializeField] private int maxHunger = 10;
+        [SerializeField] private int maxNutrition = 10;
+        [SerializeField] private float hungerIncreaseRate = 2f;
         private int actualHunger;
         private bool isHungry = true;
 
@@ -16,7 +18,8 @@ namespace SurvivalControllers
 
         private void Start()
         {
-            actualHunger = maxHunger;
+            actualHunger = maxNutrition;
+            cameraController = FindObjectOfType<CameraController>();
         }
 
         private void Update()
@@ -27,30 +30,30 @@ namespace SurvivalControllers
             }
             if (actualHunger <= 0)
             {
-                Destroy(this.gameObject);
+                cameraController.RemoveFromList(gameObject);
+                Destroy(gameObject);
             }
         }
 
         public bool IsHungry()
         {
-            if (actualHunger >= (maxHunger * 0.75f))
+            if (actualHunger >= (maxNutrition * 0.5f))
                 return false;
             else
                 return true;
         }
 
-        public void Eat()
+        public void Eat(int nutrition)
         {
-            print("Ate");
-            actualHunger += 4;
+            actualHunger += nutrition;
         }
 
         IEnumerator HungerTimer()
         {
             isHungry = false;
-            yield return new WaitForSecondsRealtime(2f);
+            yield return new WaitForSecondsRealtime(hungerIncreaseRate);
             actualHunger--;
-            text.text = "Energia: " + actualHunger;
+            text.text = "Nutrição: " + actualHunger;
             isHungry = true;
         }
     }
