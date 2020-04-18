@@ -6,40 +6,66 @@ public class Monkey : Herbivore
     protected new void Update()
     {
         base.Update();
-        switch (state)
+
+        if (!IsAtTree)
         {
-            case State.Fed:
-                if (!isRandomWalking)
-                {
-                    randomDestiny = GetRandomDestiny();
-                    StartCoroutine(StartRandomWalk(randomDestiny));
-                }
-                else
-                {
-                    if (canRandomWalk)
+            switch (state)
+            {
+                case State.Nourished:
+                    if (canMove)
                     {
-                        MoveToThis(randomDestiny);
+                        if (!isRandomWalking)
+                        {
+                            randomDestiny = GetRandomDestiny();
+                            StartCoroutine(StartRandomWalk(randomDestiny));
+                        }
+                        else
+                        {
+                            if (canRandomWalk)
+                            {
+                                MoveToThis(randomDestiny);
+                            }
+                        }
                     }
-                }
-                break;
-            case State.Hungry:
-                if (food == null)
-                {
-                    if (!foodOnSight)
-                        SearchFood();
-                }
-                else
-                {
-                    MoveToThis(food.transform.position);
-                }
-                break;
+                    break;
+                case State.Hungry:
+                    if (food == null)
+                    {
+                        if (!foodOnSight)
+                            SearchFood();
+                    }
+                    else
+                    {
+                        if (canMove)
+                            MoveToThis(food.transform.position);
+                    }
+                    break;
+                case State.Thirsty:
+                    if (river == null)
+                    {
+                        if (!riverOnSight)
+                            SearchRiver();
+                    }
+                    else
+                    {
+                        if (canMove)
+                            MoveToThis(river.transform.position);
+                    }
+                    break;
+            }
+        }
+        else
+        {
+            myRigidbody.velocity = Vector3.zero;
         }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, viewRange);
+        Gizmos.DrawWireSphere(transform.position, foodViewRange);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, riverViewRange);
     }
     
     private Vector3 GetRandomDestiny()

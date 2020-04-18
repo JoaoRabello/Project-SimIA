@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Food
+  - River
+  - Herbivore
+  - Carnivore
+  - Tree
   layers:
   - Default
   - TransparentFX
@@ -15,9 +19,9 @@ TagManager:
   - 
   - 
   - Food
-  - Monkey
-  - 
-  - 
+  - River
+  - Herbivore
+  - Tree
   - 
   - 
   - 

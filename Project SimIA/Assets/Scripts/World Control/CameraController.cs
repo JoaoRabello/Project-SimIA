@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Vector3 offset;
-    
-    [SerializeField] List<GameObject> monkeys;
-    private GameObject activeMonkey;
+    [SerializeField] List<GameObject> animals;
+    private GameObject activeAnimal;
     private int index = 0;
 
     [SerializeField] private Transform cameraTransform;
+    [SerializeField] private Quaternion cameraRotation;
     [SerializeField] private Vector3 zoomAmount;
     private Vector3 newZoom;
 
     void Start()
     {
-        activeMonkey = monkeys[0];
-        cameraTransform.parent = activeMonkey.transform;
+        activeAnimal = animals[0];
+        cameraTransform.parent = activeAnimal.transform;
+        cameraRotation = cameraTransform.rotation;
+        print(cameraRotation);
         newZoom = cameraTransform.localPosition;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && monkeys.Count != 0)
+        if (Input.GetKeyDown(KeyCode.Space) && animals.Count != 0)
         {
             NextIndex();
         }
@@ -39,8 +40,8 @@ public class CameraController : MonoBehaviour
                 newZoom += zoomAmount;
             }
         }
-
-        cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, newZoom / 2.5f, Time.deltaTime * 0.5f);
+        cameraTransform.localRotation = Quaternion.identity;
+        cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, newZoom, Time.deltaTime * .5f);
     }
 
     public void CameraUnparent()
@@ -50,8 +51,8 @@ public class CameraController : MonoBehaviour
 
     public void RemoveFromList(GameObject objectToRemove)
     {
-        monkeys.Remove(objectToRemove);
-        if (objectToRemove.Equals(activeMonkey))
+        animals.Remove(objectToRemove);
+        if (objectToRemove.Equals(activeAnimal))
         {
             NextIndex();
         }
@@ -59,9 +60,9 @@ public class CameraController : MonoBehaviour
 
     private void NextIndex()
     {
-        if(monkeys.Count != 0)
+        if(animals.Count != 0)
         {
-            if (index < monkeys.Count - 1)
+            if (index < animals.Count - 1)
             {
                 index++;
             }
@@ -69,8 +70,8 @@ public class CameraController : MonoBehaviour
             {
                 index = 0;
             }
-            activeMonkey = monkeys[index];
-            cameraTransform.parent = activeMonkey.transform;
+            activeAnimal = animals[index];
+            cameraTransform.parent = activeAnimal.transform;
         }
         else
         {
