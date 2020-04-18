@@ -5,9 +5,10 @@ public class Carnivore : Animal
     public override void MoveToThis(Vector3 destiny)
     {
         Vector3 direction = (destiny - transform.position).normalized;
-        transform.LookAt(destiny);
 
-        myRigidbody.velocity = direction * speed;
+        transform.forward = Vector3.Lerp(transform.forward, direction, 5 * Time.deltaTime);
+        
+        myRigidbody.velocity = direction * actualSpeed;
     }
 
     protected override void EatFood(Herbivore herbivore)
@@ -31,17 +32,15 @@ public class Carnivore : Animal
                 Destroy(gObject);
             }
         }
-        //else
-        //{
-        //    if (gObject.CompareTag("River"))
-        //    {
-        //        Debug.Log("At River");
-        //        if (nutritionManager.IsThirsty())
-        //        {
-        //            Debug.Log("Trying to Drink");
-        //            DrinkWater();
-        //        }
-        //    }
-        //}
+        else
+        {
+            if (gObject.CompareTag("River"))
+            {
+                if (nutritionManager.IsThirsty())
+                {
+                    DrinkWater();
+                }
+            }
+        }
     }
 }

@@ -25,6 +25,7 @@ public abstract class Animal : MonoBehaviour, IMovable
     protected GameObject river;
 
     public float speed;
+    protected float actualSpeed;
     protected Vector3 randomDestiny;
     protected bool canMove = true;
     protected bool canRandomWalk = true;
@@ -38,15 +39,12 @@ public abstract class Animal : MonoBehaviour, IMovable
     {
         nutritionManager = GetComponent<NutritionManager>();
         myRigidbody = GetComponent<Rigidbody>();
+        actualSpeed = speed;
     }
 
     protected void Update()
     {
         StateCheck();
-        if (food)
-        {
-            Debug.DrawLine(transform.position, food.transform.position, Color.red);
-        }
     }
 
     private void StateCheck()

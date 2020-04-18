@@ -60,13 +60,13 @@ public class Monkey : Herbivore
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, foodViewRange);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, riverViewRange);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(transform.position, foodViewRange);
+    //    Gizmos.color = Color.blue;
+    //    Gizmos.DrawWireSphere(transform.position, riverViewRange);
+    //}
     
     private Vector3 GetRandomDestiny()
     {

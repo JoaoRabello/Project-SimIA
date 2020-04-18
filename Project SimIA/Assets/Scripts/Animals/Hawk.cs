@@ -35,34 +35,42 @@ public class Hawk : Carnivore
                     }
                 }
                 break;
-            //case State.Thirsty:
-            //    if (river == null)
-            //    {
-            //        if (!riverOnSight)
-            //            SearchRiver();
-            //    }
-            //    else
-            //    {
-            //        if (canMove)
-            //            MoveToThis(river.transform.position);
-            //    }
-            //    break;
+            case State.Thirsty:
+                if (river == null)
+                {
+                    if (!riverOnSight)
+                        SearchRiver();
+                }
+                else
+                {
+                    if (canMove)
+                    {
+                        Flyby();
+                    }
+                    else
+                    {
+                        NormalFly();
+                    }
+                }
+                break;
 
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, foodViewRange);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, riverViewRange);
-    }
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(transform.position, foodViewRange);
+    //    Gizmos.color = Color.blue;
+    //    Gizmos.DrawWireSphere(transform.position, riverViewRange);
+    //}
 
     private void NormalFly()
     {
         if (canMove)
         {
+            actualSpeed = speed;
+            flybyCount = 0;
             if (!isRandomWalking)
             {
                 randomDestiny = GetRandomDestiny();
@@ -82,7 +90,7 @@ public class Hawk : Carnivore
     {
         if(flybyCount == 0)
         {
-            speed *= 3;
+            actualSpeed *= 3;
             flybyCount++;
         }
         MoveToThis(food.transform.position);
@@ -93,14 +101,14 @@ public class Hawk : Carnivore
         float randomY = Random.Range(transform.position.y - 5, transform.position.y + 5);
         if(randomY > 6)
         {
-            return new Vector3(Random.Range(transform.position.x - 10, transform.position.x + 10),
+            return new Vector3(Random.Range(transform.position.x - 20, transform.position.x + 20),
                             randomY,
-                            Random.Range(transform.position.z - 10, transform.position.z + 10));
+                            Random.Range(transform.position.z - 20, transform.position.z + 20));
         }
         else
         {
             return new Vector3(Random.Range(transform.position.x - 10, transform.position.x + 10),
-                            transform.position.y,
+                            transform.position.y + Random.Range(transform.position.y, transform.position.y + 6),
                             Random.Range(transform.position.z - 10, transform.position.z + 10));
         }
     }

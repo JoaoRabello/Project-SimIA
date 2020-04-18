@@ -6,6 +6,7 @@ public class Tree : MonoBehaviour
     public int NumberOfFruits { get; private set; }
     [SerializeField] private Fruit fruitType;
     [SerializeField] private Transform treeTop;
+    [SerializeField] private Transform treeBot;
 
     private void Start()
     {
@@ -15,7 +16,10 @@ public class Tree : MonoBehaviour
     public Fruit GetFruit()
     {
         if (NumberOfFruits > 0)
+        {
+            NumberOfFruits--;
             return fruitType;
+        }
         else
             return null;
     }
@@ -23,5 +27,10 @@ public class Tree : MonoBehaviour
     public Vector3 GetTreeTopPosition()
     {
         return treeTop.position;
+    }
+
+    public Vector3 GetTreeBotPosition()
+    {
+        return treeBot.position;
     }
 }

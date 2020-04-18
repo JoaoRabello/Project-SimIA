@@ -15,19 +15,18 @@ public class CameraController : MonoBehaviour
 
     void Start()
     {
-        activeAnimal = animals[0];
-        cameraTransform.parent = activeAnimal.transform;
+        //activeAnimal = animals[0];
+        //cameraTransform.parent = activeAnimal.transform;
         cameraRotation = cameraTransform.rotation;
-        print(cameraRotation);
         newZoom = cameraTransform.localPosition;
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && animals.Count != 0)
-        {
-            NextIndex();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space) && animals.Count != 0)
+        //{
+        //    NextIndex();
+        //}
 
         if (Input.GetAxisRaw("Mouse ScrollWheel") > 0)
         {

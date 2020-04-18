@@ -17,7 +17,7 @@ public class Herbivore : Animal
     public override void MoveToThis(Vector3 destiny)
     {
         Vector3 direction = new Vector3(destiny.x - transform.position.x, 0, destiny.z - transform.position.z).normalized;
-        myRigidbody.velocity = direction * speed;
+        myRigidbody.velocity = direction * actualSpeed;
     }
 
     protected override void EatFood(Fruit fruit)
@@ -42,8 +42,6 @@ public class Herbivore : Animal
         {
             if (nutritionManager.IsHungry())
             {
-                //EatFood(gObject.GetComponent<Fruit>());
-                //Destroy(gObject);
                 ClimbTree(gObject.GetComponent<Tree>());
             }
         }
@@ -61,24 +59,29 @@ public class Herbivore : Animal
 
     private void ClimbTree(Tree tree)
     {
-        print("climb tree");
+        IsAtTree = true;
+
         transform.position = tree.GetTreeTopPosition();
         StartCoroutine(EatTreeFruits(tree));
     }
 
+    private void DescendTree(Tree tree)
+    {
+        IsAtTree = false;
+
+        transform.position = tree.GetTreeBotPosition();
+    }
+
     IEnumerator EatTreeFruits(Tree tree)
     {
-        IsAtTree = true;
         while (tree.NumberOfFruits > 0)
         {
             if (nutritionManager.IsHungry())
             {
-                print("come fruta no while");
                 EatFood(tree.GetFruit());
             }
             yield return null;
         }
-        print("acabou o while");
-        IsAtTree = false;
+        DescendTree(tree);
     }
 }
