@@ -84,4 +84,9 @@ public class Herbivore : Animal
         }
         DescendTree(tree);
     }
+
+    public void Die()
+    {
+        AnimalStatistics.Instance.RemoveAnimal(GetComponent<Monkey>());
+    }
 }

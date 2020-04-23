@@ -24,7 +24,6 @@ public class Hawk : Carnivore
                 }
                 else
                 {
-                    print(food);
                     if (canMove && !food.GetComponent<Herbivore>().IsAtTree)
                     {
                         Flyby();
@@ -93,7 +92,10 @@ public class Hawk : Carnivore
             actualSpeed *= 3;
             flybyCount++;
         }
-        MoveToThis(food.transform.position);
+        if (food || river)
+        {
+            MoveToThis(food.transform.position);
+        }
     }
 
     private Vector3 GetRandomDestiny()

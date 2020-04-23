@@ -14,6 +14,7 @@ public class Carnivore : Animal
     protected override void EatFood(Herbivore herbivore)
     {
         nutritionManager.Eat(herbivore.FatAmount);
+        herbivore.Die();
         food = null;
         foodOnSight = false;
         state = State.Nourished;

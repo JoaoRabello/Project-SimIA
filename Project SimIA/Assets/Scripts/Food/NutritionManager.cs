@@ -37,8 +37,7 @@ namespace SurvivalManagers
 
             if (actualHunger <= 0)
             {
-                cameraController.RemoveFromList(gameObject);
-                Destroy(gameObject);
+                Die(gameObject);
             }
 
             nutririonSlider.value = actualHunger / maxNutrition;
@@ -79,6 +78,23 @@ namespace SurvivalManagers
             yield return new WaitForSecondsRealtime(thirstIncreaseRate);
             actualThirst--;
             isThirsty = true;
+        }
+
+        private void Die(GameObject animal)
+        {
+            //cameraController.RemoveFromList(gameObject);
+            if (animal.GetComponent<Monkey>())
+            {
+                AnimalStatistics.Instance.RemoveAnimal(animal.GetComponent<Monkey>());
+            }
+            else
+            {
+                if (animal.GetComponent<Hawk>())
+                {
+                    AnimalStatistics.Instance.RemoveAnimal(animal.GetComponent<Hawk>());
+                }
+            }
+            Destroy(gameObject);
         }
     }
 }
