@@ -26,7 +26,7 @@ public class Hawk : Carnivore
                 {
                     if (canMove && !food.GetComponent<Herbivore>().IsAtTree)
                     {
-                        Flyby();
+                        Flyby(food.GetComponent<Herbivore>());
                     }
                     else
                     {
@@ -44,7 +44,7 @@ public class Hawk : Carnivore
                 {
                     if (canMove)
                     {
-                        Flyby();
+                        Flyby(river);
                     }
                     else
                     {
@@ -85,16 +85,29 @@ public class Hawk : Carnivore
         }
     }
 
-    private void Flyby()
+    private void Flyby(Herbivore food)
+    {
+        if (flybyCount == 0)
+        {
+            actualSpeed *= 3;
+            flybyCount++;
+        }
+        if (food)
+        {
+            MoveToThis(food.transform.position);
+        }
+    }
+
+    private void Flyby(GameObject river)
     {
         if(flybyCount == 0)
         {
             actualSpeed *= 3;
             flybyCount++;
         }
-        if (food || river)
+        if (river)
         {
-            MoveToThis(food.transform.position);
+            MoveToThis(river.transform.position);
         }
     }
 

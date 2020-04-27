@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
@@ -40,9 +39,11 @@ public class Herbivore : Animal
 
         if (gObject.CompareTag("Tree"))
         {
-            if (nutritionManager.IsHungry())
+            Tree tree = gObject.GetComponent<Tree>();
+
+            if (nutritionManager.IsHungry() && tree.Equals(this.tree))
             {
-                ClimbTree(gObject.GetComponent<Tree>());
+                ClimbTree(tree);
             }
         }
         else
@@ -61,15 +62,16 @@ public class Herbivore : Animal
     {
         IsAtTree = true;
 
-        transform.position = tree.GetTreeTopPosition();
+        transform.position = new Vector3(tree.GetTreeTopPosition().x + Random.Range(-1,1), tree.GetTreeTopPosition().y, tree.GetTreeTopPosition().z + Random.Range(-1, 1));
         StartCoroutine(EatTreeFruits(tree));
     }
 
     private void DescendTree(Tree tree)
     {
         IsAtTree = false;
-
         transform.position = tree.GetTreeBotPosition();
+        this.tree = null;
+        treeOnSight = false;
     }
 
     IEnumerator EatTreeFruits(Tree tree)

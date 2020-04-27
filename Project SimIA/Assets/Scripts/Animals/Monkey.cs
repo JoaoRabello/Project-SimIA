@@ -12,32 +12,21 @@ public class Monkey : Herbivore
             switch (state)
             {
                 case State.Nourished:
-                    if (canMove)
-                    {
-                        if (!isRandomWalking)
-                        {
-                            randomDestiny = GetRandomDestiny();
-                            StartCoroutine(StartRandomWalk(randomDestiny));
-                        }
-                        else
-                        {
-                            if (canRandomWalk)
-                            {
-                                MoveToThis(randomDestiny);
-                            }
-                        }
-                    }
+                    NormalWalk();
                     break;
                 case State.Hungry:
-                    if (food == null)
+                    if (tree == null)
                     {
-                        if (!foodOnSight)
-                            SearchFood();
+                        if (!treeOnSight)
+                        {
+                            SearchTree();
+                            NormalWalk();
+                        }
                     }
                     else
                     {
                         if (canMove)
-                            MoveToThis(food.transform.position);
+                            MoveToThis(tree.transform.position);
                     }
                     break;
                 case State.Thirsty:
@@ -57,6 +46,25 @@ public class Monkey : Herbivore
         else
         {
             myRigidbody.velocity = Vector3.zero;
+        }
+    }
+
+    private void NormalWalk()
+    {
+        if (canMove)
+        {
+            if (!isRandomWalking)
+            {
+                randomDestiny = GetRandomDestiny();
+                StartCoroutine(StartRandomWalk(randomDestiny));
+            }
+            else
+            {
+                if (canRandomWalk)
+                {
+                    MoveToThis(randomDestiny);
+                }
+            }
         }
     }
 

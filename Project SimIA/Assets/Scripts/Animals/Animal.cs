@@ -16,11 +16,14 @@ public abstract class Animal : MonoBehaviour, IMovable
 
     [Header("Resources Searching Attributes")]
     public LayerMask foodMask;
+    public LayerMask treeMask;
     public LayerMask riverMask;
     public float foodViewRange;
     public float riverViewRange;
     protected bool foodOnSight = false;
+    protected bool treeOnSight = false;
     protected bool riverOnSight = false;
+    protected Tree tree;
     protected GameObject food;
     protected GameObject river;
 
@@ -115,25 +118,32 @@ public abstract class Animal : MonoBehaviour, IMovable
                 foodOnSight = true;
             }
         }
+    }
 
-        //if (numberOfFoods == 0)
-        //{
-        //    foodOnSight = false;
-        //}
-        //else
-        //{
-        //    float smallerDistance = 10000;
-        //    foreach (var food in foodNextToThis)
-        //    {
-        //        float distance = Vector3.Distance(transform.position, food.transform.position);
-        //        if(distance < smallerDistance)
-        //        {
-        //            smallerDistance = distance;
-        //            this.food = food.gameObject;
-        //        }
-        //        foodOnSight = true;
-        //    }
-        //}
+    protected void SearchTree()
+    {
+        Collider[] treeNextToThis = Physics.OverlapSphere(transform.position, foodViewRange, treeMask);
+        int numberOfTrees = treeNextToThis.Length;
+
+        if (numberOfTrees == 0)
+        {
+            treeOnSight = false;
+        }
+        else
+        {
+            float smallerDistance = 10000;
+            foreach (var treeObject in treeNextToThis)
+            {
+                float distance = Vector3.Distance(transform.position, treeObject.transform.position);
+                Tree tree = treeObject.GetComponent<Tree>();
+                if (distance < smallerDistance && tree.NumberOfFruits > 0)
+                {
+                    smallerDistance = distance;
+                    this.tree = tree;
+                    treeOnSight = true;
+                }
+            }
+        }
     }
 
     protected void SearchRiver()

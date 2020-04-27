@@ -50,9 +50,8 @@ public class AnimalStatistics : MonoBehaviour
         monkeyAmountText.text = "Macacos: " + monkeys.Count.ToString();
         hawkAmountText.text = "Gaviões: " + hawks.Count.ToString();
 
-        print(monkeys.Count / initialMonkeyAmount);
-        monkeyAmountSlider.value = (float)(monkeys.Count / initialMonkeyAmount);
-        hawkAmountSlider.value = (float)(hawks.Count / initialHawkAmount);
+        monkeyAmountSlider.value = (monkeys.Count / initialMonkeyAmount);
+        hawkAmountSlider.value = (hawks.Count / initialHawkAmount);
     }
 
     public void AddAnimal(Monkey monkey)

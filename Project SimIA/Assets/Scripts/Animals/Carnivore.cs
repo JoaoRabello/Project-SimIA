@@ -20,6 +20,12 @@ public class Carnivore : Animal
         state = State.Nourished;
     }
 
+    protected override void DrinkWater()
+    {
+        nutritionManager.Drink(30);
+        state = State.Nourished;
+    }
+
     private void OnCollisionEnter(Collision col)
     {
         GameObject gObject = col.gameObject;
@@ -33,14 +39,15 @@ public class Carnivore : Animal
                 Destroy(gObject);
             }
         }
-        else
+    }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.CompareTag("River"))
         {
-            if (gObject.CompareTag("River"))
+            if (nutritionManager.IsThirsty())
             {
-                if (nutritionManager.IsThirsty())
-                {
-                    DrinkWater();
-                }
+                DrinkWater();
             }
         }
     }
