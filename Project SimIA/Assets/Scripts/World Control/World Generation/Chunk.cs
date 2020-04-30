@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -37,6 +38,8 @@ public class Chunk
         CreateMeshData();
 
         CreateMesh();
+
+        chunkObject.AddComponent<MeshCollider>();
     }
 
     private void PopulateVoxelMap()

@@ -8,6 +8,7 @@ public class World : MonoBehaviour
     public BiomeAttributes biome;
 
     public Transform player;
+    public Transform userCamera;
     public Vector3 spawnPosition;
 
     public Material material;
@@ -23,7 +24,7 @@ public class World : MonoBehaviour
     {
         Random.InitState(seed);
 
-        spawnPosition = new Vector3((VoxelData.worldSizeInChunks * VoxelData.chunkWidth) / 2f, VoxelData.chunkHeight + 2f, (VoxelData.worldSizeInChunks * VoxelData.chunkWidth) / 2f);
+        spawnPosition = new Vector3((VoxelData.worldSizeInChunks * VoxelData.chunkWidth) / 2f, biome.terrainHeight + 40f, (VoxelData.worldSizeInChunks * VoxelData.chunkWidth) / 2f);
         GenerateWorld();
         playerLastChunkCoord = GetChunkCoordFromVector3(player.position);
     }
@@ -97,6 +98,7 @@ public class World : MonoBehaviour
         }
 
         player.position = spawnPosition;
+        userCamera.position = new Vector3(player.position.x - 100, userCamera.position.y, player.position.z - 100);
     }
 
     public byte GetVoxel(Vector3 pos)

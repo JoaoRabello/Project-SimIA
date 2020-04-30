@@ -255,7 +255,7 @@ MonoBehaviour:
   fruitCapacity: 3
   timeToFruitSpawn: 30
   fruitQuantityText: {fileID: 8609446738835219942}
-  fruitType: {fileID: 2650868921614321744, guid: 6a6bd1926f34df6439e358c97322bc27,
+  fruitType: {fileID: 4094988680419533470, guid: a95205d324dba184e81755c6a6486140,
     type: 3}
   treeTop: {fileID: 6403697604239159392}
   treeBot: {fileID: 3185446711679633161}
