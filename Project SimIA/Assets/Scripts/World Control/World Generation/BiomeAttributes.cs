@@ -10,7 +10,10 @@ public class BiomeAttributes : ScriptableObject
     public int solidGroundHeight;
     public int terrainHeight;
     public float terrainScale;
+    public bool hasTrees;
 
+    public GameObject trees;
+    public GameObject[] animals;
     public Lode[] lodes;
 }
 

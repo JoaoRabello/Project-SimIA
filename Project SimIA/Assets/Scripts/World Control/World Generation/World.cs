@@ -9,6 +9,7 @@ public class World : MonoBehaviour
 
     public Transform player;
     public Transform userCamera;
+    public float cameraOffset;
     public Vector3 spawnPosition;
 
     public Material material;
@@ -96,9 +97,13 @@ public class World : MonoBehaviour
                 CreateNewChunk(x, z);
             }
         }
+        
+        GenerateVegetation();
+        SpawnAnimals();
 
         player.position = spawnPosition;
-        userCamera.position = new Vector3(player.position.x - 100, userCamera.position.y, player.position.z - 100);
+        userCamera.position = new Vector3(player.position.x - cameraOffset, userCamera.position.y, player.position.z - cameraOffset);
+        transform.SetParent(player);
     }
 
     public byte GetVoxel(Vector3 pos)
@@ -116,9 +121,9 @@ public class World : MonoBehaviour
 
         //Basic Terrain Pass
         int terrainHeight = Mathf.FloorToInt(biome.terrainHeight * Noise.Get2DPerlin(new Vector2(pos.x, pos.z), 0, biome.terrainScale)) + biome.solidGroundHeight;
-        byte voxelValue = 0;
+        byte voxelValue;
 
-        if(yPos == terrainHeight)
+        if (yPos == terrainHeight)
         {
             voxelValue = 3;
         }
@@ -175,6 +180,49 @@ public class World : MonoBehaviour
             return true;
         else
             return false;
+    }
+
+    private void GenerateVegetation()
+    {
+        if (biome.hasTrees)
+        {
+            Vector3 randomPos;
+            int randomIndex;
+
+            for (int i = 0; i < VoxelData.worldSizeInChunks; i++)
+            {
+                for (int j = 0; j < VoxelData.worldSizeInChunks; j++)
+                {
+                    randomIndex = chunks[i, j].voxelPositions.Count - Random.Range(1, VoxelData.chunkWidth);
+                    randomPos = chunks[i, j].voxelPositions[randomIndex];
+                    
+                    if (IsVoxelInWorld(randomPos) && Noise.Get2DPerlin(new Vector2(randomPos.x, randomPos.z), 0, biome.terrainScale) > 0.5f)
+                    {
+                        Instantiate(biome.trees, randomPos, Quaternion.identity, transform);
+                    }
+                }
+            }
+        }
+    }
+
+    private void SpawnAnimals()
+    {
+        Vector3 randomPos;
+        int randomIndex;
+
+        for (int i = 0; i < VoxelData.worldSizeInChunks; i++)
+        {
+            for (int j = 0; j < VoxelData.worldSizeInChunks; j++)
+            {
+                randomIndex = chunks[i, j].voxelPositions.Count - Random.Range(1, VoxelData.chunkWidth);
+                randomPos = chunks[i, j].voxelPositions[randomIndex];
+                
+                if (IsVoxelInWorld(randomPos) && Noise.Get2DPerlin(new Vector2(randomPos.x, randomPos.z), 0, biome.terrainScale) > 0.5f)
+                {
+                    Instantiate(biome.animals[0], randomPos, Quaternion.identity, transform);
+                }
+            }
+        }
     }
 }
 

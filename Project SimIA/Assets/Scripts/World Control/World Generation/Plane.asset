@@ -10,12 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6667717f9a3fa942bb423e956c66d18, type: 3}
-  m_Name: PlaneBiome
+  m_Name: Plane
   m_EditorClassIdentifier: 
-  biomeName: PlaneBiome
-  solidGroundHeight: 10
-  terrainHeight: 10
+  biomeName: Plane
+  solidGroundHeight: 20
+  terrainHeight: 20
   terrainScale: 0.25
+  hasTrees: 1
+  trees: {fileID: 3505636292994534185, guid: fdda955b41897aa42865f75e5e54b2e9, type: 3}
+  animals:
+  - {fileID: 1831340686281916611, guid: 71b7e8a39f450844d8da78e14051e517, type: 3}
   lodes:
   - nodeName: Dirt
     blockID: 5

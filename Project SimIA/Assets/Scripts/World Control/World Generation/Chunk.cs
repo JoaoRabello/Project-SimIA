@@ -16,7 +16,8 @@ public class Chunk
     private List<int> triangles = new List<int>();
     private List<Vector2> uvs = new List<Vector2>();
 
-    byte[,,] voxelMap = new byte[VoxelData.chunkWidth, VoxelData.chunkHeight, VoxelData.chunkWidth];
+    public byte[,,] VoxelMap { get; private set; } = new byte[VoxelData.chunkWidth, VoxelData.chunkHeight, VoxelData.chunkWidth];
+    public List<Vector3> voxelPositions = new List<Vector3>();
 
     private World world;
 
@@ -50,7 +51,11 @@ public class Chunk
             {
                 for (int z = 0; z < VoxelData.chunkWidth; z++)
                 {
-                    voxelMap[x, y, z] = world.GetVoxel(new Vector3(x, y, z) + position);
+                    VoxelMap[x, y, z] = world.GetVoxel(new Vector3(x, y, z) + position);
+                    if (world.blockTypes[VoxelMap[x, y, z]].isSolid)
+                    {
+                        voxelPositions.Add(new Vector3(x + 0.5f, y + 1, z + 0.5f) + position);
+                    }
                 }
             }
         }
@@ -64,7 +69,7 @@ public class Chunk
             {
                 for (int z = 0; z < VoxelData.chunkWidth; z++)
                 {
-                    if (world.blockTypes[voxelMap[x, y, z]].isSolid)
+                    if (world.blockTypes[VoxelMap[x, y, z]].isSolid)
                         AddVoxelDataToChunk(new Vector3(x, y, z));
                 }
             }
@@ -91,6 +96,7 @@ public class Chunk
         }
     }
 
+
     private bool IsVoxelInChunk(int x, int y, int z)
     {
         if (x < 0 || x > VoxelData.chunkWidth - 1 || y < 0 || y > VoxelData.chunkHeight - 1 || z < 0 || z > VoxelData.chunkWidth - 1)
@@ -108,7 +114,7 @@ public class Chunk
         if (!IsVoxelInChunk(x, y, z))
             return world.blockTypes[world.GetVoxel(pos + position)].isSolid;
 
-        return world.blockTypes[voxelMap[x, y, z]].isSolid;
+        return world.blockTypes[VoxelMap[x, y, z]].isSolid;
     }
 
     private void AddVoxelDataToChunk(Vector3 pos)
@@ -117,7 +123,7 @@ public class Chunk
         {
             if (!CheckVoxel(pos + VoxelData.faceChecks[j]))
             {
-                byte blockID = voxelMap[(int)pos.x, (int)pos.y, (int)pos.z];
+                byte blockID = VoxelMap[(int)pos.x, (int)pos.y, (int)pos.z];
 
                 vertices.Add(pos + VoxelData.voxelVerts[VoxelData.voxelTris[j, 0]]);
                 vertices.Add(pos + VoxelData.voxelVerts[VoxelData.voxelTris[j, 1]]);
