@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class World : MonoBehaviour
 {
-    public int seed;
+    private int seed;
     public BiomeAttributes biome;
 
     public Transform player;
@@ -23,9 +23,10 @@ public class World : MonoBehaviour
 
     private void Start()
     {
+        seed = Random.Range(0, 2147483647);
         Random.InitState(seed);
 
-        spawnPosition = new Vector3((VoxelData.worldSizeInChunks * VoxelData.chunkWidth) / 2f, biome.terrainHeight + 40f, (VoxelData.worldSizeInChunks * VoxelData.chunkWidth) / 2f);
+        spawnPosition = new Vector3((VoxelData.worldSizeInChunks * VoxelData.chunkWidth) / 2f, 5f, (VoxelData.worldSizeInChunks * VoxelData.chunkWidth) / 2f);
         GenerateWorld();
         playerLastChunkCoord = GetChunkCoordFromVector3(player.position);
     }
@@ -209,7 +210,7 @@ public class World : MonoBehaviour
     {
         Vector3 randomPos;
         int randomIndex;
-
+        int monkeyAmount = 0;
         for (int i = 0; i < VoxelData.worldSizeInChunks; i++)
         {
             for (int j = 0; j < VoxelData.worldSizeInChunks; j++)
@@ -217,12 +218,14 @@ public class World : MonoBehaviour
                 randomIndex = chunks[i, j].voxelPositions.Count - Random.Range(1, VoxelData.chunkWidth);
                 randomPos = chunks[i, j].voxelPositions[randomIndex];
                 
-                if (IsVoxelInWorld(randomPos) && Noise.Get2DPerlin(new Vector2(randomPos.x, randomPos.z), 0, biome.terrainScale) > 0.5f)
+                if (IsVoxelInWorld(randomPos) && Noise.Get2DPerlin(new Vector2(randomPos.x, randomPos.z), 0, biome.terrainScale) > 0.8f)
                 {
                     Instantiate(biome.animals[0], randomPos, Quaternion.identity, transform);
+                    monkeyAmount++;
                 }
             }
         }
+        print(monkeyAmount);
     }
 }
 
