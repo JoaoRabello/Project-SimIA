@@ -39,8 +39,18 @@ public class Herbivore : Animal
         Vector3 direction = new Vector3(destiny.x - transform.position.x, 0, destiny.z - transform.position.z);
         Vector3 moveDirection = direction.normalized;
         
-        Color color = Physics.Raycast(transform.position, direction, groundLayerMask)? Color.white : Color.red;
-        Debug.DrawRay(transform.position, direction * 50, color);
+        RaycastHit hit;
+        Ray ray = new Ray(transform.position, direction);
+        if (Physics.Raycast(ray, out hit))
+        {
+            if(hit.collider.gameObject.CompareTag("Ground"))
+            {
+                //TODO: Jump!
+                myRigidbody.AddForce(Vector3.up * Time.deltaTime * 10000, ForceMode.Force);
+            }
+        }
+
+        Debug.DrawRay(transform.position, direction, Color.white);
         
         myRigidbody.velocity = moveDirection * actualSpeed;
     }
