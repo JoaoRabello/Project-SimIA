@@ -211,7 +211,7 @@ GameObject:
   - component: {fileID: 385464492}
   - component: {fileID: 385464491}
   - component: {fileID: 385464490}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Chunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,9 +227,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 385464489}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf502e64e3fe64049b2fb43ecfeb122e, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b5842a3575c5c44196bdcdf5d8e168b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  voxelPositions: []
 --- !u!33 &385464491
 MeshFilter:
   m_ObjectHideFlags: 0

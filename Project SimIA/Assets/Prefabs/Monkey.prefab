@@ -431,6 +431,10 @@ MonoBehaviour:
   hungerText: {fileID: 1831340686278861377}
   thirstText: {fileID: 1831340685474478262}
   fatAmount: 10
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 16384
+  gravityScale: 60
 --- !u!114 &1831340686281916610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -460,7 +464,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -932,7 +936,6 @@ GameObject:
   - component: {fileID: 1831340687385840765}
   - component: {fileID: 1831340687385840762}
   - component: {fileID: 1831340687385840763}
-  - component: {fileID: 1831340687385840764}
   m_Layer: 10
   m_Name: Monkey Body
   m_TagString: Herbivore
@@ -1001,22 +1004,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!95 &1831340687385840764
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831340687385840761}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b983cfbdeb31aba4d9b3113914e19401, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

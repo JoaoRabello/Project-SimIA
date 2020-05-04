@@ -78,9 +78,9 @@ public class Monkey : Herbivore
     
     private Vector3 GetRandomDestiny()
     {
-        return new Vector3(Random.Range(transform.position.x - 5, transform.position.x + 5), 
+        return new Vector3(Random.Range(transform.position.x - 15, transform.position.x + 15), 
                             0,
-                            Random.Range(transform.position.z - 5, transform.position.z + 5));
+                            Random.Range(transform.position.z - 15, transform.position.z + 15));
     }
 
     private IEnumerator StartRandomWalk(Vector3 destiny)

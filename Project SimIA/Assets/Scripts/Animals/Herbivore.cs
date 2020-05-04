@@ -5,18 +5,44 @@ using UnityEngine;
 public class Herbivore : Animal
 {
     [SerializeField] protected int fatAmount;
+
+    [Header("Gravity Attributes")]
+    [SerializeField] protected LayerMask groundLayerMask;
+    [SerializeField] protected float gravityScale;
+    protected float gravity = 9.81f;
+
+    private bool isTouchingGround = true;
+    private bool isJumping = false;
+
     public int FatAmount { get => fatAmount; }
     public bool IsAtTree { get; private set; }
 
     protected new void Update()
     {
         base.Update();
+        
+        UseGravity();
+    }
+
+    private void UseGravity()
+    {
+        Vector3 gravityDirection = Vector3.down;
+        
+        if(!Physics.Raycast(transform.position, gravityDirection, 1, groundLayerMask) && !isTouchingGround && !isJumping)
+        {
+            myRigidbody.AddForce(Vector3.down * gravity * gravityScale * Time.deltaTime * 10, ForceMode.Force);
+        }
     }
 
     public override void MoveToThis(Vector3 destiny)
     {
-        Vector3 direction = new Vector3(destiny.x - transform.position.x, 0, destiny.z - transform.position.z).normalized;
-        myRigidbody.velocity = direction * actualSpeed;
+        Vector3 direction = new Vector3(destiny.x - transform.position.x, 0, destiny.z - transform.position.z);
+        Vector3 moveDirection = direction.normalized;
+        
+        Color color = Physics.Raycast(transform.position, direction, groundLayerMask)? Color.white : Color.red;
+        Debug.DrawRay(transform.position, direction * 50, color);
+        
+        myRigidbody.velocity = moveDirection * actualSpeed;
     }
 
     protected override void EatFood(Fruit fruit)
@@ -31,6 +57,22 @@ public class Herbivore : Animal
     {
         nutritionManager.Drink(30);
         state = State.Nourished;
+    }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.CompareTag("Ground"))
+        {
+            isTouchingGround = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision col)
+    {
+        if (col.gameObject.CompareTag("Ground"))
+        {
+            isTouchingGround = false;
+        }
     }
 
     private void OnTriggerEnter(Collider col)

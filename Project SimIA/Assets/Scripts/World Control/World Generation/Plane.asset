@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Plane
   m_EditorClassIdentifier: 
   biomeName: Plane
-  solidGroundHeight: 10
-  terrainHeight: 20
+  solidGroundHeight: 3
+  terrainHeight: 3
   terrainScale: 0.25
   hasTrees: 1
   trees: {fileID: 3505636292994534185, guid: fdda955b41897aa42865f75e5e54b2e9, type: 3}

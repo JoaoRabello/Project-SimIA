@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chunk
+public class ChunkAttributes : MonoBehaviour
 {
     public ChunkCoord coord;
     GameObject chunkObject;
@@ -21,7 +20,7 @@ public class Chunk
 
     private World world;
 
-    public Chunk(ChunkCoord _coord,World _world)
+    public ChunkAttributes(ChunkCoord _coord, World _world)
     {
         coord = _coord;
         world = _world;
@@ -31,6 +30,8 @@ public class Chunk
 
         meshRenderer.material = world.material;
         chunkObject.transform.SetParent(world.transform);
+        chunkObject.layer = 14;
+        chunkObject.tag = "Ground";
         chunkObject.transform.position = new Vector3(coord.x * VoxelData.chunkWidth, 0f, coord.z * VoxelData.chunkWidth);
         chunkObject.name = "Chunk " + coord.x + ", " + coord.z;
 
@@ -78,9 +79,9 @@ public class Chunk
 
     public bool isActive
     {
-        get 
-        { 
-            return chunkObject.activeSelf; 
+        get
+        {
+            return chunkObject.activeSelf;
         }
         set
         {
@@ -197,3 +198,4 @@ public class ChunkCoord
         }
     }
 }
+

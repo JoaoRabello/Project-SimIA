@@ -7,7 +7,6 @@ using System;
 
 public abstract class Animal : MonoBehaviour, IMovable
 {
-    //[Flags]
     protected enum State { Nourished, Hungry, Thirsty, Horny}
     protected State state;
 

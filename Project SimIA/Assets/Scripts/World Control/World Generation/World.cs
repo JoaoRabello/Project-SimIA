@@ -15,7 +15,7 @@ public class World : MonoBehaviour
     public Material material;
     public BlockType[] blockTypes;
 
-    Chunk[,] chunks = new Chunk[VoxelData.worldSizeInChunks, VoxelData.worldSizeInChunks];
+    ChunkAttributes[,] chunks = new ChunkAttributes[VoxelData.worldSizeInChunks, VoxelData.worldSizeInChunks];
 
     List<ChunkCoord> activeChunks = new List<ChunkCoord>();
     ChunkCoord playerChunkCoord;
@@ -163,7 +163,7 @@ public class World : MonoBehaviour
 
     private void CreateNewChunk (int x, int z)
     {
-        chunks[x,z] = new Chunk(new ChunkCoord(x, z), this);
+        chunks[x,z] = new ChunkAttributes(new ChunkCoord(x, z), this);
         activeChunks.Add(new ChunkCoord(x, z));
     }
 
@@ -218,7 +218,7 @@ public class World : MonoBehaviour
                 randomIndex = chunks[i, j].voxelPositions.Count - Random.Range(1, VoxelData.chunkWidth);
                 randomPos = chunks[i, j].voxelPositions[randomIndex];
                 
-                if (IsVoxelInWorld(randomPos) && Noise.Get2DPerlin(new Vector2(randomPos.x, randomPos.z), 0, biome.terrainScale) > 0.8f)
+                if (IsVoxelInWorld(randomPos) && Noise.Get2DPerlin(new Vector2(randomPos.x, randomPos.z), 0, biome.terrainScale) > 0.7f)
                 {
                     Instantiate(biome.animals[0], randomPos, Quaternion.identity, transform);
                     monkeyAmount++;
