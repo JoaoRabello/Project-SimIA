@@ -8,6 +8,7 @@ public class World : MonoBehaviour
     public BiomeAttributes biome;
 
     public Transform player;
+    public Light sunLight;
     public Transform userCamera;
     public float cameraOffset;
     public Vector3 spawnPosition;
@@ -23,7 +24,7 @@ public class World : MonoBehaviour
 
     private void Start()
     {
-        seed = Random.Range(0, 2147483647);
+        seed = Random.Range(0, 250000);
         Random.InitState(seed);
 
         spawnPosition = new Vector3((VoxelData.worldSizeInChunks * VoxelData.chunkWidth) / 2f, 5f, (VoxelData.worldSizeInChunks * VoxelData.chunkWidth) / 2f);
@@ -105,6 +106,7 @@ public class World : MonoBehaviour
         player.position = spawnPosition;
         userCamera.position = new Vector3(player.position.x - cameraOffset, userCamera.position.y, player.position.z - cameraOffset);
         transform.SetParent(player);
+        sunLight.color = biome.sunLightColor;
     }
 
     public byte GetVoxel(Vector3 pos)
@@ -126,13 +128,13 @@ public class World : MonoBehaviour
 
         if (yPos == terrainHeight)
         {
-            voxelValue = 3;
+            voxelValue = biome.blockTypes[0];
         }
         else
         {
             if(yPos < terrainHeight && yPos > terrainHeight - 4)
             {
-                voxelValue = 5;
+                voxelValue = biome.blockTypes[1];
             }
             else
             {

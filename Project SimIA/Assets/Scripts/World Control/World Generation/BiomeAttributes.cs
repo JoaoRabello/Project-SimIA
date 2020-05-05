@@ -10,11 +10,16 @@ public class BiomeAttributes : ScriptableObject
     public int solidGroundHeight;
     public int terrainHeight;
     public float terrainScale;
-    public bool hasTrees;
 
+    [Header("Biome Aesthetics")]
+    public Color sunLightColor;
+    public byte[] blockTypes;
+    public Lode[] lodes;
+
+    [Header("Biome Entities")]
+    public bool hasTrees;
     public GameObject trees;
     public GameObject[] animals;
-    public Lode[] lodes;
 }
 
 [System.Serializable]

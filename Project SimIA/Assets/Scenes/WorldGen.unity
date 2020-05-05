@@ -546,12 +546,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc6c30b5a51adb41957cd514419c142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: {fileID: 11400000, guid: 85f79936d79369d4aad36b289a9f6cf5, type: 2}
+  biome: {fileID: 11400000, guid: fe5f4675260644f429e74ba3716ebf60, type: 2}
   player: {fileID: 238547030}
+  sunLight: {fileID: 682559906}
   userCamera: {fileID: 1245939350}
   cameraOffset: 100
   spawnPosition: {x: 0, y: 0, z: 0}
-  material: {fileID: 2100000, guid: f3144e099fd34eb47aafe8f5b71fa804, type: 2}
+  material: {fileID: 2100000, guid: 8f42e238356b571408bf47ddf4be7e4a, type: 2}
   blockTypes:
   - blockName: Air
     isSolid: 0
@@ -601,6 +602,22 @@ MonoBehaviour:
     bottomFaceTexture: 1
     leftFaceTexture: 1
     rightFaceTexture: 1
+  - blockName: Snow Dirt
+    isSolid: 1
+    backFaceTexture: 14
+    frontFaceTexture: 14
+    topFaceTexture: 14
+    bottomFaceTexture: 14
+    leftFaceTexture: 14
+    rightFaceTexture: 14
+  - blockName: Snow Grass
+    isSolid: 1
+    backFaceTexture: 13
+    frontFaceTexture: 13
+    topFaceTexture: 12
+    bottomFaceTexture: 14
+    leftFaceTexture: 13
+    rightFaceTexture: 13
 --- !u!4 &1693410555
 Transform:
   m_ObjectHideFlags: 0

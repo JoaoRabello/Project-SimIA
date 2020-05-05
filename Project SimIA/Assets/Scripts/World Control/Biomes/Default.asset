@@ -16,6 +16,9 @@ MonoBehaviour:
   solidGroundHeight: 42
   terrainHeight: 42
   terrainScale: 0.25
+  hasTrees: 0
+  trees: {fileID: 0}
+  animals: []
   lodes:
   - nodeName: Dirt
     blockID: 5
