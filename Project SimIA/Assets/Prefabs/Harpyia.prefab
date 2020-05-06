@@ -443,11 +443,11 @@ MonoBehaviour:
   treeMask:
     serializedVersion: 2
     m_Bits: 2048
-  riverMask:
+  waterMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   foodViewRange: 100
-  riverViewRange: 100
+  waterViewRange: 200
   speed: 3
   hungerText: {fileID: 458447542965384590}
   thirstText: {fileID: 458447542959794569}

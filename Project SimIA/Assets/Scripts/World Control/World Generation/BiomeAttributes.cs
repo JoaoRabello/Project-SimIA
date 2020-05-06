@@ -18,8 +18,14 @@ public class BiomeAttributes : ScriptableObject
 
     [Header("Biome Entities")]
     public bool hasTrees;
+    public AnimalType[] animals;
     public GameObject trees;
-    public GameObject[] animals;
+}
+
+public enum AnimalType
+{
+    Monkey,
+    Hawk
 }
 
 [System.Serializable]

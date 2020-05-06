@@ -16,15 +16,15 @@ public abstract class Animal : MonoBehaviour, IMovable
     [Header("Resources Searching Attributes")]
     public LayerMask foodMask;
     public LayerMask treeMask;
-    public LayerMask riverMask;
+    public LayerMask waterMask;
     public float foodViewRange;
-    public float riverViewRange;
+    public float waterViewRange;
     protected bool foodOnSight = false;
     protected bool treeOnSight = false;
     protected bool riverOnSight = false;
     protected Tree tree;
     protected GameObject food;
-    protected GameObject river;
+    protected GameObject water;
 
     public float speed;
     protected float actualSpeed;
@@ -147,7 +147,7 @@ public abstract class Animal : MonoBehaviour, IMovable
 
     protected void SearchRiver()
     {
-        Collider[] riverNextToThis = Physics.OverlapSphere(transform.position, riverViewRange, riverMask);
+        Collider[] riverNextToThis = Physics.OverlapSphere(transform.position, waterViewRange, waterMask);
         bool isRiverNext = riverNextToThis.Length > 0;
 
         if (!isRiverNext)
@@ -158,7 +158,7 @@ public abstract class Animal : MonoBehaviour, IMovable
         {
             if (riverNextToThis[0] != null)
             {
-                river = riverNextToThis[0].gameObject;
+                water = riverNextToThis[0].gameObject;
                 riverOnSight = true;
             }
         }

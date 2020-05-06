@@ -3,6 +3,13 @@ using UnityEngine;
 
 public class Monkey : Herbivore
 {
+    public void Initialize(DNA dna)
+    {
+        speed = dna.speed;
+        foodViewRange = dna.foodViewRange;
+        waterViewRange = dna.waterViewRange;
+    }
+    
     protected new void Update()
     {
         base.Update();
@@ -30,7 +37,7 @@ public class Monkey : Herbivore
                     }
                     break;
                 case State.Thirsty:
-                    if (river == null)
+                    if (water == null)
                     {
                         if (!riverOnSight)
                             SearchRiver();
@@ -38,7 +45,7 @@ public class Monkey : Herbivore
                     else
                     {
                         if (canMove)
-                            MoveToThis(river.transform.position);
+                            MoveToThis(water.transform.position);
                     }
                     break;
             }

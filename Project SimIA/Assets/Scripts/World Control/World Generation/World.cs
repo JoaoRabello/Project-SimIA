@@ -212,22 +212,31 @@ public class World : MonoBehaviour
     {
         Vector3 randomPos;
         int randomIndex;
-        int monkeyAmount = 0;
-        for (int i = 0; i < VoxelData.worldSizeInChunks; i++)
+        for (int k = 0; k < biome.animals.Length; k++)
         {
-            for (int j = 0; j < VoxelData.worldSizeInChunks; j++)
+            
+            for (int i = 0; i < VoxelData.worldSizeInChunks; i++)
             {
-                randomIndex = chunks[i, j].voxelPositions.Count - Random.Range(1, VoxelData.chunkWidth);
-                randomPos = chunks[i, j].voxelPositions[randomIndex];
-                
-                if (IsVoxelInWorld(randomPos) && Noise.Get2DPerlin(new Vector2(randomPos.x, randomPos.z), 0, biome.terrainScale) > 0.7f)
+                for (int j = 0; j < VoxelData.worldSizeInChunks; j++)
                 {
-                    Instantiate(biome.animals[0], randomPos, Quaternion.identity, transform);
-                    monkeyAmount++;
+                    randomIndex = chunks[i, j].voxelPositions.Count - Random.Range(1, VoxelData.chunkWidth);
+                    randomPos = chunks[i, j].voxelPositions[randomIndex];
+
+                    if (IsVoxelInWorld(randomPos) && Noise.Get2DPerlin(new Vector2(randomPos.x, randomPos.z), 0, biome.terrainScale) > 0.7f)
+                    {
+                        switch (biome.animals[k])
+                        {
+                            case AnimalType.Monkey:
+                                AnimalFactory.CreateMonkey(5, 10, 50, randomPos, transform);
+                                break;
+                            case AnimalType.Hawk:
+                                AnimalFactory.CreateHawk(3, 100, 200, randomPos, transform);
+                                break;
+                        }
+                    }
                 }
             }
         }
-        print(monkeyAmount);
     }
 }
 

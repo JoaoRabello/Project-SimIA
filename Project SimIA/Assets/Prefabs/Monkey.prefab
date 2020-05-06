@@ -422,11 +422,11 @@ MonoBehaviour:
   treeMask:
     serializedVersion: 2
     m_Bits: 2048
-  riverMask:
+  waterMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   foodViewRange: 10
-  riverViewRange: 50
+  waterViewRange: 50
   speed: 5
   hungerText: {fileID: 1831340686278861377}
   thirstText: {fileID: 1831340685474478262}
