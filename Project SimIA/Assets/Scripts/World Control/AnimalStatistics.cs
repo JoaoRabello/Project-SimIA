@@ -7,24 +7,7 @@ using System;
 
 public class AnimalStatistics : MonoBehaviour
 {
-    public static AnimalStatistics _instance;
-    public static AnimalStatistics Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<AnimalStatistics>();
-
-                if (_instance == null)
-                {
-                    GameObject container = new GameObject("AnimalStatistics");
-                    _instance = container.AddComponent<AnimalStatistics>();
-                }
-            }
-            return _instance;
-        }
-    }
+    public static AnimalStatistics Instance;
 
     private List<Monkey> monkeys = new List<Monkey>();
     private List<Hawk> hawks = new List<Hawk>();
@@ -38,11 +21,9 @@ public class AnimalStatistics : MonoBehaviour
     private float initialMonkeyAmount;
     private float initialHawkAmount;
 
-    void Start()
+    void Awake()
     {
-        UpdateStatistics();
-        initialMonkeyAmount = monkeys.Count;
-        initialHawkAmount = hawks.Count;
+        Instance = this;
     }
 
     void Update()
@@ -74,7 +55,7 @@ public class AnimalStatistics : MonoBehaviour
         hawks.Remove(hawk);
     }
 
-    private void UpdateStatistics()
+    public void UpdateStatistics()
     {
         Monkey[] monkeyArray = FindObjectsOfType<Monkey>();
         Hawk[] hawkArray = FindObjectsOfType<Hawk>();
@@ -93,5 +74,7 @@ public class AnimalStatistics : MonoBehaviour
                 hawks.Add(hawkArray[i]);
             }
         }
+        initialMonkeyAmount = monkeys.Count;
+        initialHawkAmount = hawks.Count;
     }
 }

@@ -6,16 +6,10 @@ public class Hawk : Carnivore
 {
     private int flybyCount;
 
-    public void Initialize(DNA dna)
-    {
-        speed = dna.speed;
-        foodViewRange = dna.foodViewRange;
-        waterViewRange = dna.waterViewRange;
-    }
-
     protected new void Update()
     {
         base.Update();
+
         switch (state)
         {
             case State.Nourished:
@@ -27,13 +21,15 @@ public class Hawk : Carnivore
                     if (!foodOnSight)
                     {
                         SearchFood();
+                        NormalFly();
                     }
                 }
                 else
                 {
-                    if (canMove && !food.GetComponent<Herbivore>().IsAtTree)
+                    Herbivore herbivore = food.GetComponent<Herbivore>();
+                    if (canMove && !herbivore.IsAtTree)
                     {
-                        Flyby(food.GetComponent<Herbivore>());
+                        Hunt(herbivore);
                     }
                     else
                     {
@@ -92,16 +88,17 @@ public class Hawk : Carnivore
         }
     }
 
-    private void Flyby(Herbivore food)
+    protected override void Hunt(Herbivore preyToHunt)
     {
         if (flybyCount == 0)
         {
             actualSpeed *= 3;
             flybyCount++;
         }
-        if (food)
+        if (preyToHunt != null)
         {
-            MoveToThis(food.transform.position);
+            SetPrey(preyToHunt);
+            MoveToThis(prey.transform.position);
         }
     }
 

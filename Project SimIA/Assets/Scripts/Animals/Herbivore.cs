@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ public class Herbivore : Animal
 
     private bool isTouchingGround = true;
     private bool isJumping = false;
+
+    private List<Carnivore> hunters = new List<Carnivore>();
 
     public int FatAmount { get => fatAmount; }
     public bool IsAtTree { get; private set; }
@@ -139,8 +142,21 @@ public class Herbivore : Animal
         DescendTree(tree);
     }
 
+    public void SetHunter(Carnivore carnivore)
+    {
+        if (!hunters.Contains(carnivore))
+        {
+            hunters.Add(carnivore);
+        }
+    }
+
     public void Die()
     {
         AnimalStatistics.Instance.RemoveAnimal(GetComponent<Monkey>());
+        foreach (Carnivore hunter in hunters)
+        {
+            hunter.StopHunting();
+        }
+        Destroy(gameObject);
     }
 }

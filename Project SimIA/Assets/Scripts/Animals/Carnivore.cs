@@ -2,6 +2,9 @@
 
 public class Carnivore : Animal
 {
+    protected Herbivore prey;
+    protected bool isHunting = false;
+
     public override void MoveToThis(Vector3 destiny)
     {
         Vector3 direction = (destiny - transform.position).normalized;
@@ -9,6 +12,25 @@ public class Carnivore : Animal
         transform.forward = Vector3.Lerp(transform.forward, direction, 5 * Time.deltaTime);
         
         myRigidbody.velocity = direction * actualSpeed;
+    }
+
+    protected virtual void Hunt(Herbivore preyToHunt) { }
+
+    protected void SetPrey(Herbivore preyToHunt)
+    {
+        if (prey == null)
+        {
+            prey = preyToHunt;
+            prey.SetHunter(this);
+        }
+    }
+
+    public void StopHunting()
+    {
+        prey = null;
+        isHunting = false;
+        food = null;
+        foodOnSight = false;
     }
 
     protected override void EatFood(Herbivore herbivore)
@@ -36,7 +58,6 @@ public class Carnivore : Animal
             if (nutritionManager.IsHungry())
             {
                 EatFood(herbivore);
-                Destroy(gObject);
             }
         }
     }

@@ -37,6 +37,13 @@ public abstract class Animal : MonoBehaviour, IMovable
     public Text hungerText;
     public Text thirstText;
 
+    public void Initialize(DNA dna)
+    {
+        speed = dna.speed;
+        foodViewRange = dna.foodViewRange;
+        waterViewRange = dna.waterViewRange;
+    }
+
     private void Awake()
     {
         nutritionManager = GetComponent<NutritionManager>();

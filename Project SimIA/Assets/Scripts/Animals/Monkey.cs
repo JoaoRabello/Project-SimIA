@@ -3,13 +3,6 @@ using UnityEngine;
 
 public class Monkey : Herbivore
 {
-    public void Initialize(DNA dna)
-    {
-        speed = dna.speed;
-        foodViewRange = dna.foodViewRange;
-        waterViewRange = dna.waterViewRange;
-    }
-    
     protected new void Update()
     {
         base.Update();

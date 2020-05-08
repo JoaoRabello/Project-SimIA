@@ -24,8 +24,8 @@ public class World : MonoBehaviour
 
     private void Start()
     {
-        seed = Random.Range(0, 250000);
-        Random.InitState(seed);
+        //seed = Random.Range(0, 250000);
+        //Random.InitState(seed);
 
         spawnPosition = new Vector3((VoxelData.worldSizeInChunks * VoxelData.chunkWidth) / 2f, 5f, (VoxelData.worldSizeInChunks * VoxelData.chunkWidth) / 2f);
         GenerateWorld();
@@ -214,7 +214,6 @@ public class World : MonoBehaviour
         int randomIndex;
         for (int k = 0; k < biome.animals.Length; k++)
         {
-            
             for (int i = 0; i < VoxelData.worldSizeInChunks; i++)
             {
                 for (int j = 0; j < VoxelData.worldSizeInChunks; j++)
@@ -230,13 +229,15 @@ public class World : MonoBehaviour
                                 AnimalFactory.CreateMonkey(5, 10, 50, randomPos, transform);
                                 break;
                             case AnimalType.Hawk:
-                                AnimalFactory.CreateHawk(3, 100, 200, randomPos, transform);
+                                AnimalFactory.CreateHawk(3, 100, 200, new Vector3(randomPos.x, biome.terrainHeight + 10f, randomPos.z), transform);
                                 break;
                         }
                     }
                 }
             }
         }
+
+        AnimalStatistics.Instance.UpdateStatistics();
     }
 }
 

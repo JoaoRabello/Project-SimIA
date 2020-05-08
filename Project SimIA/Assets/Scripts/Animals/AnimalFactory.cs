@@ -16,8 +16,10 @@ public class AnimalFactory : MonoBehaviour
     public static void CreateMonkey(float speed, float foodViewRange, float waterViewRange, Vector3 spawnPosition, Transform parent)
     {
         DNA dna = new DNA();
+        Mutation mutation = new Mutation();
 
-        dna.speed = speed;
+        dna.speed = mutation.MutateGene(speed);
+        print(dna.speed); 
         dna.foodViewRange = foodViewRange;
         dna.waterViewRange = waterViewRange;
 
