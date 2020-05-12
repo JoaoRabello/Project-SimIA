@@ -27,5 +27,5 @@ MonoBehaviour:
     threshold: 0.5
     noiseOffset: 0
   hasTrees: 1
-  animals: 0000000001000000
+  animals: 00000000
   trees: {fileID: 3505636292994534185, guid: fdda955b41897aa42865f75e5e54b2e9, type: 3}

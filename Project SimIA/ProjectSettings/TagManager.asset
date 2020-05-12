@@ -10,6 +10,7 @@ TagManager:
   - Carnivore
   - Tree
   - Ground
+  - Monkey
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - Carnivore
   - Leaf
   - Ground
-  - 
+  - Monkey
   - 
   - 
   - 

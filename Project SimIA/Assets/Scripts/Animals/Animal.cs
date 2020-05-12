@@ -5,21 +5,31 @@ using UnityEngine.UI;
 using SurvivalManagers;
 using System;
 
+public enum BiologicalSex 
+{ 
+    Male, Female 
+}
+
 public abstract class Animal : MonoBehaviour, IMovable
 {
-    protected enum State { Nourished, Hungry, Thirsty, Horny}
+    protected enum State { Nourished, Hungry, Thirsty, Horny }
+
     protected State state;
+    protected BiologicalSex sex;
 
     protected NutritionManager nutritionManager;
     protected Rigidbody myRigidbody;
 
     [Header("Resources Searching Attributes")]
     public LayerMask foodMask;
+    public LayerMask mateMask;
     public LayerMask treeMask;
     public LayerMask waterMask;
     public float foodViewRange;
+    public float mateViewRange;
     public float waterViewRange;
     protected bool foodOnSight = false;
+    protected bool mateOnSight = false;
     protected bool treeOnSight = false;
     protected bool riverOnSight = false;
     protected Tree tree;
@@ -34,15 +44,13 @@ public abstract class Animal : MonoBehaviour, IMovable
     protected bool isRandomWalking = false;
     protected bool randomStop = false;
 
-    public Text hungerText;
-    public Text thirstText;
+    protected bool isHorny = true;
+    protected int reproductionUrge; 
+    [SerializeField] protected int maxReproductionUrge; 
+    protected float reproductionUrgeRate;
+    protected GameObject mate;
 
-    public void Initialize(DNA dna)
-    {
-        speed = dna.speed;
-        foodViewRange = dna.foodViewRange;
-        waterViewRange = dna.waterViewRange;
-    }
+    public Collider sexualOrgan;
 
     private void Awake()
     {
@@ -54,27 +62,33 @@ public abstract class Animal : MonoBehaviour, IMovable
     protected void Update()
     {
         StateCheck();
+
+        if (isHorny)
+            StartCoroutine(ReproductionTimer());
     }
 
     private void StateCheck()
     {
         if (nutritionManager.IsThirsty())
         {
-            thirstText.text = "Com Sede";
             state = State.Thirsty;
         }
         else
         {
             if (nutritionManager.IsHungry())
             {
-                hungerText.text = "Com fome";
                 state = State.Hungry;
             }
             else
             {
-                hungerText.text = "Alimentado";
-                thirstText.text = "Hidratado";
-                state = State.Nourished;
+                if (IsHorny())
+                {
+                    state = State.Horny;
+                }
+                else
+                {
+                    state = State.Nourished;
+                }
             }
         }
     }
@@ -171,6 +185,65 @@ public abstract class Animal : MonoBehaviour, IMovable
         }
     }
 
+    protected void SearchMate()
+    {
+        if (sex == BiologicalSex.Male)
+        {
+            sexualOrgan.enabled = false;
+            Collider[] females = Physics.OverlapSphere(transform.position, mateViewRange, mateMask);
+            int matesCount = females.Length;
+
+            if (matesCount == 0)
+            {
+                mateOnSight = false;
+            }
+            else
+            {
+                float smallerDistance = 10000;
+                foreach (var female in females)
+                {
+                    float distance = Vector3.Distance(transform.position, female.transform.position);
+                    if (distance < smallerDistance)
+                    {
+                        smallerDistance = distance;
+                        mate = female.gameObject;
+                    }
+                    mateOnSight = true;
+                }
+                Request(mate.GetComponentInParent<Animal>());
+            }
+            sexualOrgan.enabled = true;
+        }
+    }
+
+    public void Request(Animal mate)
+    {
+        if (mate.IsHorny())
+        {
+            mate.mate = this.gameObject;
+        }
+        else
+        {
+            this.mate = null;
+            mateOnSight = false;
+        }
+    }
+
+    private IEnumerator ReproductionTimer()
+    {
+        isHorny = false;
+        yield return new WaitForSeconds(reproductionUrgeRate);
+        reproductionUrge++;
+        isHorny = true;
+    }
+
+    protected bool IsHorny()
+    {
+        return reproductionUrge > maxReproductionUrge * 0.8f;
+    }
+
+    protected virtual void Reproduce(MonkeyDNA dna) { }
+    protected virtual void Reproduce(HawkDNA dna) { }
     protected virtual void EatFood(Fruit fruit) { }
     protected virtual void EatFood(Herbivore herbivore) { }
     protected virtual void DrinkWater() { }

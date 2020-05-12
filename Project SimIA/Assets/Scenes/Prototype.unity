@@ -682,16 +682,16 @@ RectTransform:
   m_AnchoredPosition: {x: 0.21000671, y: 0}
   m_SizeDelta: {x: -9.59, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &37271691 stripped
+--- !u!114 &32097570 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1035341265621935970, guid: bb88b7fc6adff004c877e3b6b7fd86d5,
+  m_CorrespondingSourceObject: {fileID: 1831340685933453692, guid: 71b7e8a39f450844d8da78e14051e517,
     type: 3}
-  m_PrefabInstance: {fileID: 1035341265585725417}
+  m_PrefabInstance: {fileID: 1831340686549776689}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &37713363
@@ -2184,8 +2184,6 @@ MonoBehaviour:
   foodViewRange: 10
   waterViewRange: 0
   speed: 5
-  hungerText: {fileID: 1950352191}
-  thirstText: {fileID: 1486662513}
   fatAmount: 10
   groundLayerMask:
     serializedVersion: 2
@@ -4735,10 +4733,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad2845d48094ba4e9b919ff182db06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monkeyAmountText: {fileID: 1151196923}
-  hawkAmountText: {fileID: 37271691}
-  monkeyAmountSlider: {fileID: 217793408}
-  hawkAmountSlider: {fileID: 534885996}
+  monkeyAmountText: {fileID: 0}
+  hawkAmountText: {fileID: 0}
+  monkeyAmountSlider: {fileID: 0}
+  hawkAmountSlider: {fileID: 0}
 --- !u!4 &213014153
 Transform:
   m_ObjectHideFlags: 0
@@ -4830,18 +4828,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 215665106}
   m_CullTransparentMesh: 0
---- !u!114 &217793408 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1035341265651178601, guid: bb88b7fc6adff004c877e3b6b7fd86d5,
-    type: 3}
-  m_PrefabInstance: {fileID: 1035341265585725417}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &224355898
 GameObject:
   m_ObjectHideFlags: 0
@@ -5287,8 +5273,6 @@ MonoBehaviour:
   foodViewRange: 100
   waterViewRange: 0
   speed: 3
-  hungerText: {fileID: 609287664}
-  thirstText: {fileID: 361840576}
 --- !u!4 &239828391
 Transform:
   m_ObjectHideFlags: 0
@@ -9534,18 +9518,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &534885996 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1035341265969604997, guid: bb88b7fc6adff004c877e3b6b7fd86d5,
-    type: 3}
-  m_PrefabInstance: {fileID: 1035341265585725417}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &536935232
 GameObject:
   m_ObjectHideFlags: 0
@@ -12876,8 +12848,6 @@ MonoBehaviour:
   foodViewRange: 10
   waterViewRange: 0
   speed: 5
-  hungerText: {fileID: 837702431}
-  thirstText: {fileID: 1431855733}
   fatAmount: 10
   groundLayerMask:
     serializedVersion: 2
@@ -17957,6 +17927,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0.00022197, y: -60.224}
   m_SizeDelta: {x: 329.19, y: 41.148}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &967272940 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1831340686080393246, guid: 71b7e8a39f450844d8da78e14051e517,
+    type: 3}
+  m_PrefabInstance: {fileID: 1831340686549776689}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &970421154
 GameObject:
   m_ObjectHideFlags: 0
@@ -18461,8 +18443,6 @@ MonoBehaviour:
   foodViewRange: 10
   waterViewRange: 0
   speed: 5
-  hungerText: {fileID: 1540146415}
-  thirstText: {fileID: 870870892}
   fatAmount: 10
   groundLayerMask:
     serializedVersion: 2
@@ -20062,8 +20042,6 @@ MonoBehaviour:
   foodViewRange: 10
   waterViewRange: 0
   speed: 5
-  hungerText: {fileID: 1157541728}
-  thirstText: {fileID: 1659599421}
   fatAmount: 10
   groundLayerMask:
     serializedVersion: 2
@@ -20729,18 +20707,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1147287243}
   m_CullTransparentMesh: 0
---- !u!114 &1151196923 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1035341264437346578, guid: bb88b7fc6adff004c877e3b6b7fd86d5,
-    type: 3}
-  m_PrefabInstance: {fileID: 1035341265585725417}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1153880803
 GameObject:
   m_ObjectHideFlags: 0
@@ -24028,7 +23994,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b696c237be3b73a4eae134b388ffd0cb, type: 2}
+  - {fileID: 2100000, guid: 798a1371c7dfecd478c62b90c7e17d14, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -27714,8 +27680,6 @@ MonoBehaviour:
   foodViewRange: 10
   waterViewRange: 0
   speed: 5
-  hungerText: {fileID: 1934174821}
-  thirstText: {fileID: 2096483238}
   fatAmount: 10
   groundLayerMask:
     serializedVersion: 2
@@ -28388,8 +28352,6 @@ MonoBehaviour:
   foodViewRange: 10
   waterViewRange: 0
   speed: 5
-  hungerText: {fileID: 353429756}
-  thirstText: {fileID: 1955963987}
   fatAmount: 10
   groundLayerMask:
     serializedVersion: 2
@@ -31929,7 +31891,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1741848854
 GameObject:
@@ -34187,8 +34149,6 @@ MonoBehaviour:
   foodViewRange: 10
   waterViewRange: 0
   speed: 5
-  hungerText: {fileID: 2058032878}
-  thirstText: {fileID: 215665108}
   fatAmount: 10
   groundLayerMask:
     serializedVersion: 2
@@ -34416,8 +34376,6 @@ MonoBehaviour:
   foodViewRange: 10
   waterViewRange: 0
   speed: 5
-  hungerText: {fileID: 386584358}
-  thirstText: {fileID: 1610805382}
   fatAmount: 10
   groundLayerMask:
     serializedVersion: 2
@@ -36226,8 +36184,6 @@ MonoBehaviour:
   foodViewRange: 10
   waterViewRange: 0
   speed: 5
-  hungerText: {fileID: 670755116}
-  thirstText: {fileID: 1812086269}
   fatAmount: 10
   groundLayerMask:
     serializedVersion: 2
@@ -38992,8 +38948,6 @@ MonoBehaviour:
   foodViewRange: 10
   waterViewRange: 0
   speed: 5
-  hungerText: {fileID: 268653275}
-  thirstText: {fileID: 1422390577}
   fatAmount: 10
   groundLayerMask:
     serializedVersion: 2
@@ -40596,6 +40550,85 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71b7e8a39f450844d8da78e14051e517, type: 3}
+--- !u!1001 &2775236087169846091
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2775236086934285334, guid: ad8ca9416d73efa49ab6805e773c330b,
+        type: 3}
+      propertyPath: m_Name
+      value: BabyMonkey
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775236086934285353, guid: ad8ca9416d73efa49ab6805e773c330b,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775236086934285353, guid: ad8ca9416d73efa49ab6805e773c330b,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775236086934285353, guid: ad8ca9416d73efa49ab6805e773c330b,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -58
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775236086934285353, guid: ad8ca9416d73efa49ab6805e773c330b,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775236086934285353, guid: ad8ca9416d73efa49ab6805e773c330b,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775236086934285353, guid: ad8ca9416d73efa49ab6805e773c330b,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775236086934285353, guid: ad8ca9416d73efa49ab6805e773c330b,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775236086934285353, guid: ad8ca9416d73efa49ab6805e773c330b,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775236086934285353, guid: ad8ca9416d73efa49ab6805e773c330b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775236086934285353, guid: ad8ca9416d73efa49ab6805e773c330b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775236086934285353, guid: ad8ca9416d73efa49ab6805e773c330b,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775236086934285355, guid: ad8ca9416d73efa49ab6805e773c330b,
+        type: 3}
+      propertyPath: nutririonSlider
+      value: 
+      objectReference: {fileID: 967272940}
+    - target: {fileID: 2775236086934285355, guid: ad8ca9416d73efa49ab6805e773c330b,
+        type: 3}
+      propertyPath: hydrationSlider
+      value: 
+      objectReference: {fileID: 32097570}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ad8ca9416d73efa49ab6805e773c330b, type: 3}
 --- !u!1001 &6403697603049787215
 PrefabInstance:
   m_ObjectHideFlags: 0

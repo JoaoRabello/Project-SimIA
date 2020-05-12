@@ -28,11 +28,11 @@ public class AnimalStatistics : MonoBehaviour
 
     void Update()
     {
-        monkeyAmountText.text = "Macacos: " + monkeys.Count.ToString();
-        hawkAmountText.text = "Gaviões: " + hawks.Count.ToString();
+        //monkeyAmountText.text = "Macacos: " + monkeys.Count.ToString();
+        //hawkAmountText.text = "Gaviões: " + hawks.Count.ToString();
 
-        monkeyAmountSlider.value = (monkeys.Count / initialMonkeyAmount);
-        hawkAmountSlider.value = (hawks.Count / initialHawkAmount);
+        //monkeyAmountSlider.value = (monkeys.Count / initialMonkeyAmount);
+        //hawkAmountSlider.value = (hawks.Count / initialHawkAmount);
     }
 
     public void AddAnimal(Monkey monkey)

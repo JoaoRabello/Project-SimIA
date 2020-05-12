@@ -3,6 +3,20 @@ using UnityEngine;
 
 public class Monkey : Herbivore
 {
+    protected MonkeyDNA dna;
+
+    public void Initialize(MonkeyDNA dna)
+    {
+        this.dna = dna;
+
+        speed = dna.speed;
+        foodViewRange = dna.foodViewRange;
+        waterViewRange = dna.waterViewRange;
+
+        sex = dna.sex;
+        print(sex);
+    }
+
     protected new void Update()
     {
         base.Update();
@@ -41,6 +55,27 @@ public class Monkey : Herbivore
                             MoveToThis(water.transform.position);
                     }
                     break;
+                case State.Horny:
+                    if(mate == null)
+                    {
+                        if (!mateOnSight)
+                        {
+                            SearchMate();
+                            NormalWalk();
+                        }
+                    }
+                    else
+                    {
+                        if (canMove)
+                        {
+                            MoveToThis(mate.transform.position);
+                            if (IsAtDestiny(mate.transform.position) && !mate.GetComponentInParent<Herbivore>().IsAtTree)
+                            {
+                                Reproduce();
+                            }
+                        }
+                    }
+                    break;
             }
         }
         else
@@ -49,7 +84,7 @@ public class Monkey : Herbivore
         }
     }
 
-    private void NormalWalk()
+    protected void NormalWalk()
     {
         if (canMove)
         {
@@ -90,5 +125,43 @@ public class Monkey : Herbivore
         yield return new WaitUntil(() => IsAtDestiny(randomDestiny));
 
         isRandomWalking = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        GameObject gObject = other.gameObject;
+
+        if (gObject.CompareTag("Tree"))
+        {
+            Tree tree = gObject.GetComponent<Tree>();
+
+            if (nutritionManager.IsHungry() && tree.Equals(this.tree))
+            {
+                ClimbTree(tree);
+            }
+        }
+        else
+        {
+            if (gObject.CompareTag("River"))
+            {
+                if (nutritionManager.IsThirsty())
+                {
+                    DrinkWater();
+                }
+            }
+        }
+        
+    }
+
+    private void Reproduce()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            AnimalFactory.CreateBabyMonkey(dna, mate.transform);
+        }
+        mate = null;
+        mateOnSight = false;
+        reproductionUrge = 0;
+        state = State.Nourished;
     }
 }

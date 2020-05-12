@@ -6,6 +6,13 @@ public class Hawk : Carnivore
 {
     private int flybyCount;
 
+    public void Initialize(HawkDNA dna)
+    {
+        speed = dna.speed;
+        foodViewRange = dna.foodViewRange;
+        waterViewRange = dna.waterViewRange;
+    }
+
     protected new void Update()
     {
         base.Update();

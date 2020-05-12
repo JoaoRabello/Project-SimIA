@@ -6,8 +6,6 @@ namespace SurvivalManagers
 {
     public class NutritionManager : MonoBehaviour
     {
-        private CameraController cameraController;
-
         [Header("Attributes")]
         [SerializeField] private int maxNutrition = 10;
         [SerializeField] private float hungerIncreaseRate = 2f;
@@ -25,7 +23,6 @@ namespace SurvivalManagers
         {
             actualHunger = maxNutrition;
             actualThirst = maxHydration;
-            cameraController = FindObjectOfType<CameraController>();
         }
 
         private void Update()
@@ -39,9 +36,6 @@ namespace SurvivalManagers
             {
                 Die(gameObject);
             }
-
-            nutririonSlider.value = actualHunger / maxNutrition;
-            hydrationSlider.value = actualThirst / maxHydration;
         }
 
         public bool IsHungry()
@@ -82,7 +76,6 @@ namespace SurvivalManagers
 
         private void Die(GameObject animal)
         {
-            //cameraController.RemoveFromList(gameObject);
             if (animal.GetComponent<Monkey>())
             {
                 AnimalStatistics.Instance.RemoveAnimal(animal.GetComponent<Monkey>());

@@ -42,20 +42,20 @@ public class Herbivore : Animal
         Vector3 direction = new Vector3(destiny.x - transform.position.x, 0, destiny.z - transform.position.z);
         Vector3 moveDirection = direction.normalized;
         
-        RaycastHit hit;
-        Ray ray = new Ray(transform.position, direction);
-        if (Physics.Raycast(ray, out hit))
-        {
-            if(hit.collider.gameObject.CompareTag("Ground"))
-            {
-                //TODO: Jump!
-                myRigidbody.AddForce(Vector3.up * Time.deltaTime * 10000, ForceMode.Force);
-            }
-        }
+        //RaycastHit hit;
+        //Ray ray = new Ray(transform.position, direction);
+        //if (Physics.Raycast(ray, out hit))
+        //{
+        //    if(hit.collider.gameObject.CompareTag("Ground"))
+        //    {
+        //        //TODO: Jump!
+        //        myRigidbody.AddForce(Vector3.up * Time.deltaTime * 10000, ForceMode.Force);
+        //    }
+        //}
 
         Debug.DrawRay(transform.position, direction, Color.white);
         
-        myRigidbody.velocity = moveDirection * actualSpeed;
+        myRigidbody.velocity = moveDirection * speed;
     }
 
     protected override void EatFood(Fruit fruit)
@@ -88,32 +88,7 @@ public class Herbivore : Animal
         }
     }
 
-    private void OnTriggerEnter(Collider col)
-    {
-        GameObject gObject = col.gameObject;
-
-        if (gObject.CompareTag("Tree"))
-        {
-            Tree tree = gObject.GetComponent<Tree>();
-
-            if (nutritionManager.IsHungry() && tree.Equals(this.tree))
-            {
-                ClimbTree(tree);
-            }
-        }
-        else
-        {
-            if (gObject.CompareTag("River"))
-            {
-                if (nutritionManager.IsThirsty())
-                {
-                    DrinkWater();
-                }
-            }
-        }
-    }
-
-    private void ClimbTree(Tree tree)
+    protected void ClimbTree(Tree tree)
     {
         IsAtTree = true;
 
