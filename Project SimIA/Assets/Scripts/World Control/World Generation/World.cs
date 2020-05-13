@@ -229,7 +229,10 @@ public class World : MonoBehaviour
                                 AnimalFactory.CreateMonkey(5, 10, 50, randomPos, transform);
                                 break;
                             case AnimalType.Hawk:
-                                AnimalFactory.CreateHawk(3, 100, 200, new Vector3(randomPos.x, biome.terrainHeight + 10f, randomPos.z), transform);
+                                if (Random.Range(0, 100) > 70)
+                                {
+                                    AnimalFactory.CreateHawk(3, 100, 200, new Vector3(randomPos.x, biome.terrainHeight + 20f, randomPos.z), transform);
+                                }
                                 break;
                         }
                     }

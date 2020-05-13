@@ -12,7 +12,7 @@ public enum BiologicalSex
 
 public abstract class Animal : MonoBehaviour, IMovable
 {
-    protected enum State { Nourished, Hungry, Thirsty, Horny }
+    protected enum State { Nourished, Hungry, Thirsty, Horny, Danger }
 
     protected State state;
     protected BiologicalSex sex;
@@ -22,10 +22,12 @@ public abstract class Animal : MonoBehaviour, IMovable
 
     [Header("Resources Searching Attributes")]
     public LayerMask foodMask;
+    public LayerMask dangerMask;
     public LayerMask mateMask;
     public LayerMask treeMask;
     public LayerMask waterMask;
     public float foodViewRange;
+    public float dangerViewRange;
     public float mateViewRange;
     public float waterViewRange;
     protected bool foodOnSight = false;
@@ -39,17 +41,19 @@ public abstract class Animal : MonoBehaviour, IMovable
     public float speed;
     protected float actualSpeed;
     protected Vector3 randomDestiny;
+    protected Vector3 dangerRunAwayDestiny;
     protected bool canMove = true;
     protected bool canRandomWalk = true;
     protected bool isRandomWalking = false;
     protected bool randomStop = false;
+    protected Collider[] danger;
+    protected bool isRunningFromDanger = false;
 
     protected bool isHorny = true;
     protected int reproductionUrge; 
     [SerializeField] protected int maxReproductionUrge; 
     protected float reproductionUrgeRate;
     protected GameObject mate;
-
     public Collider sexualOrgan;
 
     private void Awake()
@@ -69,25 +73,34 @@ public abstract class Animal : MonoBehaviour, IMovable
 
     private void StateCheck()
     {
-        if (nutritionManager.IsThirsty())
+        danger = Physics.OverlapSphere(transform.position, dangerViewRange, dangerMask);
+        int dangerCount = danger.Length;
+        if(dangerCount > 0)
         {
-            state = State.Thirsty;
+            state = State.Danger;
         }
         else
         {
-            if (nutritionManager.IsHungry())
+            if (nutritionManager.IsThirsty())
             {
-                state = State.Hungry;
+                state = State.Thirsty;
             }
             else
             {
-                if (IsHorny())
+                if (nutritionManager.IsHungry())
                 {
-                    state = State.Horny;
+                    state = State.Hungry;
                 }
                 else
                 {
-                    state = State.Nourished;
+                    if (IsHorny())
+                    {
+                        state = State.Horny;
+                    }
+                    else
+                    {
+                        state = State.Nourished;
+                    }
                 }
             }
         }
@@ -247,5 +260,6 @@ public abstract class Animal : MonoBehaviour, IMovable
     protected virtual void EatFood(Fruit fruit) { }
     protected virtual void EatFood(Herbivore herbivore) { }
     protected virtual void DrinkWater() { }
+    protected virtual void RunFrom(Transform danger) { }
     #endregion
 }

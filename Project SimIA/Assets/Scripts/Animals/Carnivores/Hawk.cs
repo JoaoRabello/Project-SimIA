@@ -5,12 +5,17 @@ using UnityEngine;
 public class Hawk : Carnivore
 {
     private int flybyCount;
+    
+    protected HawkDNA dna;
 
     public void Initialize(HawkDNA dna)
     {
+        this.dna = dna;
+
         speed = dna.speed;
         foodViewRange = dna.foodViewRange;
         waterViewRange = dna.waterViewRange;
+        sex = dna.sex;
     }
 
     protected new void Update()
@@ -62,6 +67,27 @@ public class Hawk : Carnivore
                     }
                 }
                 break;
+            case State.Horny:
+                if (mate == null)
+                {
+                    if (!mateOnSight)
+                    {
+                        SearchMate();
+                        NormalFly();
+                    }
+                }
+                else
+                {
+                    if (canMove)
+                    {
+                        MoveToThis(mate.transform.position);
+                        if (IsAtDestiny(mate.transform.position))
+                        {
+                            Reproduce();
+                        }
+                    }
+                }
+                break;
 
         }
     }
@@ -74,7 +100,7 @@ public class Hawk : Carnivore
     //    Gizmos.DrawWireSphere(transform.position, riverViewRange);
     //}
 
-    private void NormalFly()
+    protected void NormalFly()
     {
         if (canMove)
         {
@@ -109,7 +135,7 @@ public class Hawk : Carnivore
         }
     }
 
-    private void Flyby(GameObject river)
+    protected void Flyby(GameObject river)
     {
         if(flybyCount == 0)
         {
@@ -146,5 +172,17 @@ public class Hawk : Carnivore
         yield return new WaitUntil(() => IsAtDestiny(randomDestiny));
 
         isRandomWalking = false;
+    }
+
+    private void Reproduce()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            AnimalFactory.CreateBabyHawk(dna, mate.transform);
+        }
+        mate = null;
+        mateOnSight = false;
+        reproductionUrge = 0;
+        state = State.Nourished;
     }
 }

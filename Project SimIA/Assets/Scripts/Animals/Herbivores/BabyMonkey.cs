@@ -67,7 +67,6 @@ public class BabyMonkey : Monkey
     private IEnumerator Maturation()
     {
         yield return new WaitForSeconds(timeToMature);
-        print("Amadureceu!!!");
 
         var monkey = Instantiate(matureMonkey, transform.position, Quaternion.identity);
         monkey.Initialize(babyDNA);

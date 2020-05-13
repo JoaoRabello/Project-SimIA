@@ -417,9 +417,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monkey: {fileID: 1831340686281916611, guid: 71b7e8a39f450844d8da78e14051e517, type: 3}
+  hawk: {fileID: 458447543586441234, guid: cc53087c17a45f2448056e76217b856c, type: 3}
   babyMonkey: {fileID: 2775236086934285334, guid: ad8ca9416d73efa49ab6805e773c330b,
     type: 3}
-  hawk: {fileID: 458447543586441234, guid: cc53087c17a45f2448056e76217b856c, type: 3}
+  babyHawk: {fileID: 5146353562432407840, guid: d588daa3b5a09bc4fb8053853fb96e3a,
+    type: 3}
 --- !u!4 &1108041769
 Transform:
   m_ObjectHideFlags: 0

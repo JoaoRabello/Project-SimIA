@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fruitCapacity: 3
-  timeToFruitSpawn: 30
+  timeToFruitSpawn: 20
   fruitQuantityText: {fileID: 3271973972220267864}
   fruitType: {fileID: 4094988680419533470, guid: a95205d324dba184e81755c6a6486140,
     type: 3}

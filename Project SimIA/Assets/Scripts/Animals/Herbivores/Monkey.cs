@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Monkey : Herbivore
@@ -14,7 +15,6 @@ public class Monkey : Herbivore
         waterViewRange = dna.waterViewRange;
 
         sex = dna.sex;
-        print(sex);
     }
 
     protected new void Update()
@@ -25,6 +25,12 @@ public class Monkey : Herbivore
         {
             switch (state)
             {
+                case State.Danger:
+                    if (!isRunningFromDanger)
+                    {
+                        RunFrom();
+                    }
+                    break;
                 case State.Nourished:
                     NormalWalk();
                     break;
@@ -69,7 +75,7 @@ public class Monkey : Herbivore
                         if (canMove)
                         {
                             MoveToThis(mate.transform.position);
-                            if (IsAtDestiny(mate.transform.position) && !mate.GetComponentInParent<Herbivore>().IsAtTree)
+                            if (IsAtDestiny(mate.transform.position) && !mate.GetComponentInParent<Herbivore>().IsAtTree && !IsAtTree)
                             {
                                 Reproduce();
                             }
@@ -103,6 +109,44 @@ public class Monkey : Herbivore
         }
     }
 
+    protected void RunFrom()
+    {
+        StopCoroutine(StartRunAway(dangerRunAwayDestiny));
+        
+        dangerRunAwayDestiny = (transform.position - FindCentroid(danger)).normalized;
+
+        StartCoroutine(StartRunAway(transform.position + (dangerRunAwayDestiny)));
+    }
+
+    private Vector3 FindCentroid(Collider[] targets)
+    {
+
+        Vector3 centroid;
+        Vector3 minPoint = targets[0].transform.position;
+        Vector3 maxPoint = targets[0].transform.position;
+
+        for (int i = 1; i < targets.Length; i++)
+        {
+            Vector3 pos = targets[i].transform.position;
+            if (pos.x < minPoint.x)
+                minPoint.x = pos.x;
+            if (pos.x > maxPoint.x)
+                maxPoint.x = pos.x;
+            if (pos.y < minPoint.y)
+                minPoint.y = pos.y;
+            if (pos.y > maxPoint.y)
+                maxPoint.y = pos.y;
+            if (pos.z < minPoint.z)
+                minPoint.z = pos.z;
+            if (pos.z > maxPoint.z)
+                maxPoint.z = pos.z;
+        }
+
+        centroid = minPoint + 0.5f * (maxPoint - minPoint);
+        print(centroid);
+        return new Vector3(centroid.x, 0, centroid.z);
+    }
+
     //private void OnDrawGizmos()
     //{
     //    Gizmos.color = Color.red;
@@ -110,7 +154,7 @@ public class Monkey : Herbivore
     //    Gizmos.color = Color.blue;
     //    Gizmos.DrawWireSphere(transform.position, riverViewRange);
     //}
-    
+
     private Vector3 GetRandomDestiny()
     {
         return new Vector3(Random.Range(transform.position.x - 15, transform.position.x + 15),
@@ -125,6 +169,21 @@ public class Monkey : Herbivore
         yield return new WaitUntil(() => IsAtDestiny(randomDestiny));
 
         isRandomWalking = false;
+    }
+
+    private IEnumerator StartRunAway(Vector3 destiny)
+    {
+        isRunningFromDanger = true;
+        speed *= 2;
+        while (!IsAtDestiny(dangerRunAwayDestiny))
+        {
+            MoveToThis(dangerRunAwayDestiny);
+            print("isRunningFromDanger");
+            yield return null;
+        }
+        print("chegou");
+        speed /= 2;
+        isRunningFromDanger = false;
     }
 
     private void OnTriggerEnter(Collider other)

@@ -92,6 +92,11 @@ public class Herbivore : Animal
     {
         IsAtTree = true;
 
+        foreach (Carnivore hunter in hunters)
+        {
+            hunter.StopHunting();
+        }
+
         transform.position = new Vector3(tree.GetTreeTopPosition().x + Random.Range(-1,1), tree.GetTreeTopPosition().y, tree.GetTreeTopPosition().z + Random.Range(-1, 1));
         StartCoroutine(EatTreeFruits(tree));
     }

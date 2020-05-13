@@ -30,7 +30,9 @@ public class MonkeyDNA : DNA
 
 public class HawkDNA : DNA
 {
-
+    public const float FAT_AMOUNT_MAX = 100f;
+    public const float FAT_AMOUNT_MIN = 10f;
+    public float fatAmount;
 }
 
 public class Mutation
