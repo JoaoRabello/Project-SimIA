@@ -203,8 +203,18 @@ public abstract class Animal : MonoBehaviour, IMovable
         if (sex == BiologicalSex.Male)
         {
             sexualOrgan.enabled = false;
-            Collider[] females = Physics.OverlapSphere(transform.position, mateViewRange, mateMask);
-            int matesCount = females.Length;
+            Collider[] possibleMates = Physics.OverlapSphere(transform.position, mateViewRange, mateMask);
+            List<Collider> females = new List<Collider>();
+
+            for (int i = 0; i < possibleMates.Length; i++)
+            {
+                if (possibleMates[i].gameObject.GetComponentInParent<Animal>().sex == BiologicalSex.Female)
+                {
+                    females.Add(possibleMates[i]);
+                }
+            }
+            
+            int matesCount = females. Count;
 
             if (matesCount == 0)
             {

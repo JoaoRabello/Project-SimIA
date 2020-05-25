@@ -239,8 +239,6 @@ public class World : MonoBehaviour
                 }
             }
         }
-
-        AnimalStatistics.Instance.UpdateStatistics();
     }
 }
 

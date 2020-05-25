@@ -283,7 +283,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.4
     m_Bias: 0.05
     m_NormalBias: 0
     m_NearPlane: 0.2
@@ -707,6 +707,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3445674115344026236, guid: bb88b7fc6adff004c877e3b6b7fd86d5,
+        type: 3}
+      propertyPath: m_Text
+      value: "Estat\xEDsticas"
+      objectReference: {fileID: 0}
     - target: {fileID: 3445674116117410305, guid: bb88b7fc6adff004c877e3b6b7fd86d5,
         type: 3}
       propertyPath: m_Value

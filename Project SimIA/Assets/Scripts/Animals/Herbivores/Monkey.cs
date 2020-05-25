@@ -115,7 +115,7 @@ public class Monkey : Herbivore
         
         dangerRunAwayDestiny = (transform.position - FindCentroid(danger)).normalized;
 
-        StartCoroutine(StartRunAway(transform.position + (dangerRunAwayDestiny)));
+        StartCoroutine(StartRunAway(dangerRunAwayDestiny + transform.position));
     }
 
     private Vector3 FindCentroid(Collider[] targets)
@@ -143,7 +143,6 @@ public class Monkey : Herbivore
         }
 
         centroid = minPoint + 0.5f * (maxPoint - minPoint);
-        print(centroid);
         return new Vector3(centroid.x, 0, centroid.z);
     }
 
@@ -174,15 +173,11 @@ public class Monkey : Herbivore
     private IEnumerator StartRunAway(Vector3 destiny)
     {
         isRunningFromDanger = true;
-        speed *= 2;
-        while (!IsAtDestiny(dangerRunAwayDestiny))
+        while (!IsAtDestiny(destiny))
         {
-            MoveToThis(dangerRunAwayDestiny);
-            print("isRunningFromDanger");
+            MoveToThis(destiny);
             yield return null;
         }
-        print("chegou");
-        speed /= 2;
         isRunningFromDanger = false;
     }
 
@@ -214,10 +209,8 @@ public class Monkey : Herbivore
 
     private void Reproduce()
     {
-        for (int i = 0; i < 3; i++)
-        {
-            AnimalFactory.CreateBabyMonkey(dna, mate.transform);
-        }
+        AnimalFactory.CreateBabyMonkey(dna, mate.transform);
+       
         mate = null;
         mateOnSight = false;
         reproductionUrge = 0;

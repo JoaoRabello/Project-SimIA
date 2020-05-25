@@ -15,6 +15,7 @@ public class Hawk : Carnivore
         speed = dna.speed;
         foodViewRange = dna.foodViewRange;
         waterViewRange = dna.waterViewRange;
+
         sex = dna.sex;
     }
 
@@ -176,10 +177,8 @@ public class Hawk : Carnivore
 
     private void Reproduce()
     {
-        for (int i = 0; i < 2; i++)
-        {
-            AnimalFactory.CreateBabyHawk(dna, mate.transform);
-        }
+        AnimalFactory.CreateBabyHawk(dna, mate.transform);
+
         mate = null;
         mateOnSight = false;
         reproductionUrge = 0;

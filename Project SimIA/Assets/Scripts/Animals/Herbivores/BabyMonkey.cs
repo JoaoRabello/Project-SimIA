@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BabyMonkey : Monkey
 {
-    [SerializeField] private Monkey matureMonkey;
+    public Monkey matureMonkey;
 
     private MonkeyDNA babyDNA = new MonkeyDNA();
     private float timeToMature = 5;

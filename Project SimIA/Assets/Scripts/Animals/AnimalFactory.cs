@@ -27,6 +27,7 @@ public class AnimalFactory : MonoBehaviour
 
         var monkey = Instantiate(instance.monkey, spawnPosition, Quaternion.identity, parent).GetComponent<Monkey>();
 
+        AnimalStatistics.Instance.AddAnimal(monkey);
         monkey.Initialize(dna);
     }
 
@@ -42,6 +43,7 @@ public class AnimalFactory : MonoBehaviour
 
         var hawk = Instantiate(instance.hawk, spawnPosition, Quaternion.identity, parent).GetComponent<Hawk>();
 
+        AnimalStatistics.Instance.AddAnimal(hawk);
         hawk.Initialize(dna);
     }
 
@@ -56,6 +58,7 @@ public class AnimalFactory : MonoBehaviour
 
         var monkey = Instantiate(instance.babyMonkey, mother.position, Quaternion.identity).GetComponent<BabyMonkey>();
 
+        AnimalStatistics.Instance.AddAnimal(monkey.matureMonkey);
         monkey.Initialize(dna);
     }
 
@@ -70,6 +73,7 @@ public class AnimalFactory : MonoBehaviour
 
         var hawk = Instantiate(instance.babyHawk, mother.position, Quaternion.identity).GetComponent<BabyHawk>();
 
+        AnimalStatistics.Instance.AddAnimal(hawk);
         hawk.Initialize(dna);
     }
 
