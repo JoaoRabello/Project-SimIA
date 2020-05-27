@@ -5,7 +5,8 @@ using UnityEngine;
 public class World : MonoBehaviour
 {
     private int seed;
-    public BiomeAttributes biome;
+    private BiomeAttributes biome;
+    public List<BiomeAttributes> biomes = new List<BiomeAttributes>();
 
     public Transform player;
     public Light sunLight;
@@ -27,7 +28,10 @@ public class World : MonoBehaviour
         //seed = Random.Range(0, 250000);
         //Random.InitState(seed);
 
+        SetBiome();
+
         spawnPosition = new Vector3((VoxelData.worldSizeInChunks * VoxelData.chunkWidth) / 2f, 5f, (VoxelData.worldSizeInChunks * VoxelData.chunkWidth) / 2f);
+
         GenerateWorld();
         playerLastChunkCoord = GetChunkCoordFromVector3(player.position);
     }
@@ -90,6 +94,32 @@ public class World : MonoBehaviour
         }
     }
 
+    private void SetBiome()
+    {
+        switch (ConfigurationData.biome)
+        {
+            case WorldBiome.DEFAULT:
+                biome = biomes[0];
+                break;
+            case WorldBiome.FOREST:
+                biome = biomes[1];
+                break;
+            case WorldBiome.MOUNTAINS:
+                biome = biomes[2];
+                break;
+            case WorldBiome.DESERT:
+                biome = biomes[3];
+                break;
+            case WorldBiome.TAIGA:
+                biome = biomes[4];
+                break;
+            default:
+                biome = biomes[0];
+                break;
+        }
+
+    }
+
     private void GenerateWorld()
     {
         for (int x = (VoxelData.worldSizeInChunks / 2) - VoxelData.viewDistanceInChunks; x < (VoxelData.worldSizeInChunks / 2) + VoxelData.viewDistanceInChunks; x++)
@@ -101,7 +131,11 @@ public class World : MonoBehaviour
         }
         
         GenerateVegetation();
-        SpawnAnimals();
+
+        if(ConfigurationData.worldAnimalType == WorldAnimalType.DEFAULT)
+        {
+            SpawnAnimals();
+        }
 
         player.position = spawnPosition;
         userCamera.position = new Vector3(player.position.x - cameraOffset, userCamera.position.y, player.position.z - cameraOffset);
