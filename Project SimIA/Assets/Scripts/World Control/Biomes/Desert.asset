@@ -16,10 +16,10 @@ MonoBehaviour:
   solidGroundHeight: 10
   terrainHeight: 30
   terrainScale: 0.25
+  waterHeight: 0
   sunLightColor: {r: 1, g: 0.97404957, b: 0.6367924, a: 0}
   blockTypes: 0404
   lodes: []
   hasTrees: 0
+  animals: 00000000
   trees: {fileID: 0}
-  animals:
-  - {fileID: 1831340686281916611, guid: 71b7e8a39f450844d8da78e14051e517, type: 3}

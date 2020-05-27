@@ -559,7 +559,7 @@ MonoBehaviour:
   userCamera: {fileID: 1245939350}
   cameraOffset: 100
   spawnPosition: {x: 0, y: 0, z: 0}
-  material: {fileID: 2100000, guid: 8f42e238356b571408bf47ddf4be7e4a, type: 2}
+  material: {fileID: 2100000, guid: 5ff8b43b9bd771648a9c5775fda340b0, type: 2}
   blockTypes:
   - blockName: Air
     isSolid: 0
@@ -625,6 +625,14 @@ MonoBehaviour:
     bottomFaceTexture: 14
     leftFaceTexture: 13
     rightFaceTexture: 13
+  - blockName: Water
+    isSolid: 1
+    backFaceTexture: 11
+    frontFaceTexture: 11
+    topFaceTexture: 11
+    bottomFaceTexture: 11
+    leftFaceTexture: 11
+    rightFaceTexture: 11
 --- !u!4 &1693410555
 Transform:
   m_ObjectHideFlags: 0

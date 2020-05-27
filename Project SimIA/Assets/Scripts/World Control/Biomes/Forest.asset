@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6667717f9a3fa942bb423e956c66d18, type: 3}
   m_Name: Forest
   m_EditorClassIdentifier: 
-  biomeName: Plain
+  biomeName: Forest
   solidGroundHeight: 10
   terrainHeight: 10
   terrainScale: 0.25
+  waterHeight: 12
   sunLightColor: {r: 1, g: 0.95686275, b: 0.76862746, a: 0}
   blockTypes: 0305
   lodes:

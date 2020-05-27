@@ -10,6 +10,7 @@ public class BiomeAttributes : ScriptableObject
     public int solidGroundHeight;
     public int terrainHeight;
     public float terrainScale;
+    public int waterHeight;
 
     [Header("Biome Aesthetics")]
     public Color sunLightColor;

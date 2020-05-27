@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Plain
   m_EditorClassIdentifier: 
   biomeName: Plain
-  solidGroundHeight: 1
-  terrainHeight: 1
+  solidGroundHeight: 2
+  terrainHeight: 2
   terrainScale: 0.25
+  waterHeight: 1
   sunLightColor: {r: 1, g: 0.95686275, b: 0.76862746, a: 0}
   blockTypes: 0305
   lodes:

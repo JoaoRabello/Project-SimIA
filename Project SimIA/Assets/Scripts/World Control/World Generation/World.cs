@@ -148,7 +148,7 @@ public class World : MonoBehaviour
         int yPos = Mathf.FloorToInt(pos.y);
 
         //Immutable Pass
-        
+
         //If outside of the world, spawn air
         if (!IsVoxelInWorld(pos))
             return 0;
@@ -162,11 +162,18 @@ public class World : MonoBehaviour
 
         if (yPos == terrainHeight)
         {
-            voxelValue = biome.blockTypes[0];
+            if (yPos == biome.waterHeight || yPos == biome.waterHeight - 1 || yPos == biome.waterHeight + 1)
+            {
+                voxelValue = 8;
+            }
+            else
+            {
+                voxelValue = biome.blockTypes[0];
+            }
         }
         else
         {
-            if(yPos < terrainHeight && yPos > terrainHeight - 4)
+            if (yPos < terrainHeight && yPos > terrainHeight - 2)
             {
                 voxelValue = biome.blockTypes[1];
             }
