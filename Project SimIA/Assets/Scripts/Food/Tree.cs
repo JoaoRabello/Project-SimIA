@@ -14,6 +14,14 @@ public class Tree : MonoBehaviour
     [SerializeField] private Transform treeTop;
     [SerializeField] private Transform treeBot;
 
+    private float heat = 0;
+    private Fire fire;
+    public float heatMax;
+    private bool isBurning = false;
+
+    private float fireTimer = 0;
+    [SerializeField] private float timeToBurn = 10f;
+
     private void Start()
     {
         NumberOfFruits = fruitCapacity;
@@ -39,6 +47,11 @@ public class Tree : MonoBehaviour
         {
             timer = 0;
         }
+
+        if (isBurning)
+        {
+            Burn();
+        }
     }
 
     public Fruit GetFruit()
@@ -60,5 +73,34 @@ public class Tree : MonoBehaviour
     public Vector3 GetTreeBotPosition()
     {
         return treeBot.position;
+    }
+
+    public void IncreaseHeat(float heat, Fire fire)
+    {
+        if(this.heat < heatMax)
+        {
+            this.heat += heat;
+        }
+        else
+        {
+            if(!isBurning)
+            {
+                this.fire = fire.AddSpot(treeTop.position);
+                isBurning = true;
+            }
+        }
+    }
+
+    private void Burn()
+    {
+        if(fireTimer > timeToBurn)
+        {
+            Destroy(transform.parent.gameObject);
+            Destroy(fire.gameObject);
+        }
+        else
+        {
+            fireTimer += Time.deltaTime;
+        }
     }
 }

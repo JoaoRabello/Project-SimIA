@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class World : MonoBehaviour
 {
-    private int seed;
+    private int seed = 0;
     private BiomeAttributes biome;
     public List<BiomeAttributes> biomes = new List<BiomeAttributes>();
 
@@ -25,8 +25,8 @@ public class World : MonoBehaviour
 
     private void Start()
     {
-        //seed = Random.Range(0, 250000);
-        //Random.InitState(seed);
+        seed = Random.Range(0, 99999);
+        Random.InitState(seed);
 
         SetBiome();
 
@@ -157,7 +157,7 @@ public class World : MonoBehaviour
             return 1;
 
         //Basic Terrain Pass
-        int terrainHeight = Mathf.FloorToInt(biome.terrainHeight * Noise.Get2DPerlin(new Vector2(pos.x, pos.z), 0, biome.terrainScale)) + biome.solidGroundHeight;
+        int terrainHeight = Mathf.FloorToInt(biome.terrainHeight * Noise.Get2DPerlin(new Vector2(pos.x, pos.z), seed, biome.terrainScale)) + biome.solidGroundHeight;
         byte voxelValue;
 
         if (yPos == terrainHeight)
@@ -240,7 +240,7 @@ public class World : MonoBehaviour
                     randomIndex = chunks[i, j].voxelPositions.Count - Random.Range(1, VoxelData.chunkWidth);
                     randomPos = chunks[i, j].voxelPositions[randomIndex];
                     
-                    if (IsVoxelInWorld(randomPos) && Noise.Get2DPerlin(new Vector2(randomPos.x, randomPos.z), 0, biome.terrainScale) > 0.5f)
+                    if (IsVoxelInWorld(randomPos) && Noise.Get2DPerlin(new Vector2(randomPos.x, randomPos.z), seed, biome.terrainScale) > 0.5f)
                     {
                         Instantiate(biome.trees, randomPos, Quaternion.identity, transform);
                     }
@@ -262,7 +262,7 @@ public class World : MonoBehaviour
                     randomIndex = chunks[i, j].voxelPositions.Count - Random.Range(1, VoxelData.chunkWidth);
                     randomPos = chunks[i, j].voxelPositions[randomIndex];
 
-                    if (IsVoxelInWorld(randomPos) && Noise.Get2DPerlin(new Vector2(randomPos.x, randomPos.z), 0, biome.terrainScale) > 0.7f)
+                    if (IsVoxelInWorld(randomPos) && Noise.Get2DPerlin(new Vector2(randomPos.x, randomPos.z), seed, biome.terrainScale) > 0.7f)
                     {
                         switch (biome.animals[k])
                         {

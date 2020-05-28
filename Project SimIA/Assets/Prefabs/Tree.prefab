@@ -236,6 +236,7 @@ MonoBehaviour:
     type: 3}
   treeTop: {fileID: 201542434404538590}
   treeBot: {fileID: 8513630840703528887}
+  heatMax: 10
 --- !u!1 &496893437557169377
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,6 +297,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
