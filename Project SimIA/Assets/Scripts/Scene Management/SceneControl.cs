@@ -10,6 +10,11 @@ public class SceneControl : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void QuitSimulator()
     {
         Application.Quit();
