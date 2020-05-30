@@ -111,11 +111,20 @@ public class Herbivore : Animal
 
     IEnumerator EatTreeFruits(Tree tree)
     {
-        while (tree.NumberOfFruits > 0)
+        bool climb = true;
+
+        while (tree.NumberOfFruits > 0 && climb)
         {
-            if (nutritionManager.IsHungry())
+            if (nutritionManager.IsHungry() && !tree.IsBurning)
             {
                 EatFood(tree.GetFruit());
+            }
+            else
+            {
+                if (tree.IsBurning)
+                {
+                    climb = false;
+                }
             }
             yield return null;
         }

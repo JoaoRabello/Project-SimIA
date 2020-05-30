@@ -21,6 +21,8 @@ public class Monkey : Herbivore
     {
         base.Update();
 
+        print(gameObject.name + " " + state);
+
         if (!IsAtTree)
         {
             switch (state)
@@ -112,7 +114,8 @@ public class Monkey : Herbivore
     protected void RunFrom()
     {
         StopCoroutine(StartRunAway(dangerRunAwayDestiny));
-        
+        isRandomWalking = false;
+
         dangerRunAwayDestiny = (transform.position - FindCentroid(danger)).normalized;
 
         StartCoroutine(StartRunAway(dangerRunAwayDestiny + transform.position));
@@ -189,7 +192,7 @@ public class Monkey : Herbivore
         {
             Tree tree = gObject.GetComponent<Tree>();
 
-            if (nutritionManager.IsHungry() && tree.Equals(this.tree))
+            if (nutritionManager.IsHungry() && tree.Equals(this.tree) && !tree.IsBurning)
             {
                 ClimbTree(tree);
             }

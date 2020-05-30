@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class World : MonoBehaviour
 {
-    private int seed = 0;
+    public int seed;
     private BiomeAttributes biome;
     public List<BiomeAttributes> biomes = new List<BiomeAttributes>();
 
@@ -25,8 +25,8 @@ public class World : MonoBehaviour
 
     private void Start()
     {
-        seed = Random.Range(0, 99999);
-        Random.InitState(seed);
+        seed = Random.Range(0, 50);
+        //Random.InitState(seed);
 
         SetBiome();
 

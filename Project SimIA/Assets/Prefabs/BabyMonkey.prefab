@@ -129,6 +129,9 @@ MonoBehaviour:
   foodMask:
     serializedVersion: 2
     m_Bits: 256
+  dangerMask:
+    serializedVersion: 2
+    m_Bits: 135168
   mateMask:
     serializedVersion: 2
     m_Bits: 0
@@ -139,6 +142,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16
   foodViewRange: 10
+  dangerViewRange: 0
   mateViewRange: 0
   waterViewRange: 50
   speed: 6

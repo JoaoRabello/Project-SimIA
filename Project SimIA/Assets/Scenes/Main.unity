@@ -578,6 +578,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc6c30b5a51adb41957cd514419c142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seed: 3654
   biomes:
   - {fileID: 11400000, guid: 85f79936d79369d4aad36b289a9f6cf5, type: 2}
   - {fileID: 11400000, guid: 0f8a58bbe3253da43a8a8760fc7c6e50, type: 2}
@@ -703,6 +704,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428885799653494869, guid: bb88b7fc6adff004c877e3b6b7fd86d5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.2000122
       objectReference: {fileID: 0}
     - target: {fileID: 752414250570072035, guid: bb88b7fc6adff004c877e3b6b7fd86d5,
         type: 3}
@@ -1228,6 +1234,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8646528550443776871, guid: bb88b7fc6adff004c877e3b6b7fd86d5,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.111595154
       objectReference: {fileID: 0}
     - target: {fileID: 9143401447522435623, guid: bb88b7fc6adff004c877e3b6b7fd86d5,
         type: 3}

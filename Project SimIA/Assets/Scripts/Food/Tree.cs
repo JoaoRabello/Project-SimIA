@@ -17,7 +17,7 @@ public class Tree : MonoBehaviour
     private float heat = 0;
     private Fire fire;
     public float heatMax;
-    private bool isBurning = false;
+    public bool IsBurning = false;
 
     private float fireTimer = 0;
     [SerializeField] private float timeToBurn = 10f;
@@ -48,7 +48,7 @@ public class Tree : MonoBehaviour
             timer = 0;
         }
 
-        if (isBurning)
+        if (IsBurning)
         {
             Burn();
         }
@@ -83,10 +83,10 @@ public class Tree : MonoBehaviour
         }
         else
         {
-            if(!isBurning)
+            if(!IsBurning)
             {
                 this.fire = fire.AddSpot(treeTop.position);
-                isBurning = true;
+                IsBurning = true;
             }
         }
     }

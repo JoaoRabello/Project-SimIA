@@ -54,7 +54,7 @@ MonoBehaviour:
     m_Bits: 256
   dangerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 135168
   mateMask:
     serializedVersion: 2
     m_Bits: 32768

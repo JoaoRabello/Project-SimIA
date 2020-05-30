@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1049875166375415951}
   - component: {fileID: 2288186008685127356}
   - component: {fileID: -4135442666360648335}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,6 +112,7 @@ MonoBehaviour:
   treeLayerMask:
     serializedVersion: 2
     m_Bits: 2048
+  timeToExtinguish: 20
 --- !u!1 &4854223305184276635
 GameObject:
   m_ObjectHideFlags: 0
