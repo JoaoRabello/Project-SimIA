@@ -45,7 +45,22 @@ public class DragDrop : MonoBehaviour, IEndDragHandler, IBeginDragHandler, IDrag
         if (Physics.Raycast(ray, out hit, 1000f, layer))
         {
             Vector3 worldPos = hit.point;
-            Instantiate(itemToSpawn, worldPos, Quaternion.identity);
+
+            if(itemToSpawn.GetComponent<Monkey>())
+            {
+                AnimalFactory.CreateMonkey(5, 10, 50, worldPos, itemToSpawn.GetComponent<Monkey>().sex);
+            }
+            else
+            {
+                if (itemToSpawn.GetComponent<Hawk>())
+                {
+                    AnimalFactory.CreateHawk(3, 100, 200, new Vector3(worldPos.x, worldPos.y + 5f, worldPos.z), itemToSpawn.GetComponent<Hawk>().sex);
+                }
+                else
+                {
+                    Instantiate(itemToSpawn, worldPos, Quaternion.identity);
+                }
+            }
         }
     }
 }

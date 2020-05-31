@@ -21,8 +21,6 @@ public class Monkey : Herbivore
     {
         base.Update();
 
-        print(gameObject.name + " " + state);
-
         if (!IsAtTree)
         {
             switch (state)
@@ -159,9 +157,9 @@ public class Monkey : Herbivore
 
     private Vector3 GetRandomDestiny()
     {
-        return new Vector3(Random.Range(transform.position.x - 15, transform.position.x + 15),
-                            0,
-                            Random.Range(transform.position.z - 15, transform.position.z + 15));
+        return new Vector3(Mathf.Clamp(Random.Range(transform.position.x - 15, transform.position.x + 15), 0.5f, 155),
+                        0,
+                        Mathf.Clamp(Random.Range(transform.position.z - 15, transform.position.z + 15), 0.5f, 155));
     }
 
     private IEnumerator StartRandomWalk(Vector3 destiny)

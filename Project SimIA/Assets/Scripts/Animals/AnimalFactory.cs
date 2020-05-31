@@ -5,8 +5,10 @@ using UnityEngine;
 public class AnimalFactory : MonoBehaviour
 {
     public static AnimalFactory instance;
-    [SerializeField] private GameObject monkey;
-    [SerializeField] private GameObject hawk;
+    [SerializeField] private GameObject maleMonkey;
+    [SerializeField] private GameObject femaleMonkey;
+    [SerializeField] private GameObject maleHawk;
+    [SerializeField] private GameObject femaleHawk;
     [SerializeField] private GameObject babyMonkey;
     [SerializeField] private GameObject babyHawk;
 
@@ -23,9 +25,45 @@ public class AnimalFactory : MonoBehaviour
         dna.speed = mutation.MutateGene(speed);
         dna.foodViewRange = mutation.MutateGene(foodViewRange);
         dna.waterViewRange = mutation.MutateGene(waterViewRange);
+        
         dna.sex = mutation.RandomizeSex();
 
-        var monkey = Instantiate(instance.monkey, spawnPosition, Quaternion.identity, parent).GetComponent<Monkey>();
+        Monkey monkey;
+
+        if(dna.sex == BiologicalSex.Male)
+        {
+            monkey = Instantiate(instance.maleMonkey, spawnPosition, Quaternion.identity, parent).GetComponent<Monkey>();
+        }
+        else
+        {
+            monkey = Instantiate(instance.femaleMonkey, spawnPosition, Quaternion.identity, parent).GetComponent<Monkey>();
+        }
+
+        AnimalStatistics.Instance.AddAnimal(monkey);
+        monkey.Initialize(dna);
+    }
+
+    public static void CreateMonkey(float speed, float foodViewRange, float waterViewRange, Vector3 spawnPosition, BiologicalSex sex)
+    {
+        MonkeyDNA dna = new MonkeyDNA();
+        Mutation mutation = new Mutation();
+
+        dna.speed = mutation.MutateGene(speed);
+        dna.foodViewRange = mutation.MutateGene(foodViewRange);
+        dna.waterViewRange = mutation.MutateGene(waterViewRange);
+
+        dna.sex = sex;
+
+        Monkey monkey;
+
+        if (dna.sex == BiologicalSex.Male)
+        {
+            monkey = Instantiate(instance.maleMonkey, spawnPosition, Quaternion.identity).GetComponent<Monkey>();
+        }
+        else
+        {
+            monkey = Instantiate(instance.femaleMonkey, spawnPosition, Quaternion.identity).GetComponent<Monkey>();
+        }
 
         AnimalStatistics.Instance.AddAnimal(monkey);
         monkey.Initialize(dna);
@@ -39,9 +77,45 @@ public class AnimalFactory : MonoBehaviour
         dna.speed = speed;
         dna.foodViewRange = mutation.MutateGene(foodViewRange);
         dna.waterViewRange = mutation.MutateGene(waterViewRange);
+        
         dna.sex = mutation.RandomizeSex();
 
-        var hawk = Instantiate(instance.hawk, spawnPosition, Quaternion.identity, parent).GetComponent<Hawk>();
+        Hawk hawk;
+
+        if (dna.sex == BiologicalSex.Male)
+        {
+            hawk = Instantiate(instance.maleHawk, spawnPosition, Quaternion.identity, parent).GetComponent<Hawk>();
+        }
+        else
+        {
+            hawk = Instantiate(instance.femaleHawk, spawnPosition, Quaternion.identity, parent).GetComponent<Hawk>();
+        }
+
+        AnimalStatistics.Instance.AddAnimal(hawk);
+        hawk.Initialize(dna);
+    }
+
+    public static void CreateHawk(float speed, float foodViewRange, float waterViewRange, Vector3 spawnPosition, BiologicalSex sex)
+    {
+        HawkDNA dna = new HawkDNA();
+        Mutation mutation = new Mutation();
+
+        dna.speed = speed;
+        dna.foodViewRange = mutation.MutateGene(foodViewRange);
+        dna.waterViewRange = mutation.MutateGene(waterViewRange);
+
+        dna.sex = sex;
+
+        Hawk hawk;
+
+        if (dna.sex == BiologicalSex.Male)
+        {
+            hawk = Instantiate(instance.maleHawk, spawnPosition, Quaternion.identity).GetComponent<Hawk>();
+        }
+        else
+        {
+            hawk = Instantiate(instance.femaleHawk, spawnPosition, Quaternion.identity).GetComponent<Hawk>();
+        }
 
         AnimalStatistics.Instance.AddAnimal(hawk);
         hawk.Initialize(dna);

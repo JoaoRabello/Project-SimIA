@@ -154,15 +154,15 @@ public class Hawk : Carnivore
         float randomY = Random.Range(transform.position.y - 5, transform.position.y + 5);
         if(randomY > 6)
         {
-            return new Vector3(Random.Range(transform.position.x - 20, transform.position.x + 20),
+            return new Vector3(Mathf.Clamp(Random.Range(transform.position.x - 20, transform.position.x + 20), 0.5f, 155f),
                             randomY,
-                            Random.Range(transform.position.z - 20, transform.position.z + 20));
+                            Mathf.Clamp(Random.Range(transform.position.z - 20, transform.position.z + 20), 0.5f , 155f));
         }
         else
         {
-            return new Vector3(Random.Range(transform.position.x - 10, transform.position.x + 10),
+            return new Vector3(Mathf.Clamp(Random.Range(transform.position.x - 10, transform.position.x + 10), 0.5f, 155f),
                             transform.position.y + Random.Range(transform.position.y, transform.position.y + 6),
-                            Random.Range(transform.position.z - 10, transform.position.z + 10));
+                            Mathf.Clamp(Random.Range(transform.position.z - 10, transform.position.z + 10), 0.5f, 155f));
         }
     }
 

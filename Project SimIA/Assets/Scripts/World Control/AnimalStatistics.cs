@@ -55,11 +55,11 @@ public class AnimalStatistics : MonoBehaviour
         hawks.Remove(hawk);
     }
 
-    public void UpdateStatistics()
+    public void UpdateMonkeyStatistics()
     {
         Monkey[] monkeyArray = FindObjectsOfType<Monkey>();
-        Hawk[] hawkArray = FindObjectsOfType<Hawk>();
 
+        monkeys.Clear();
         for (int i = 0; i < monkeyArray.Length; i++)
         {
             if (monkeyArray[i] != null)
@@ -67,14 +67,23 @@ public class AnimalStatistics : MonoBehaviour
                 monkeys.Add(monkeyArray[i]);
             }
         }
+        
+        initialMonkeyAmount = monkeys.Count;
+    }
+
+    private void UpdateHawkStatistics()
+    {
+        Hawk[] hawkArray = FindObjectsOfType<Hawk>();
+
+        hawks.Clear();
         for (int i = 0; i < hawkArray.Length; i++)
         {
-            if(hawkArray[i] != null)
+            if (hawkArray[i] != null)
             {
                 hawks.Add(hawkArray[i]);
             }
         }
-        initialMonkeyAmount = monkeys.Count;
+
         initialHawkAmount = hawks.Count;
     }
 }

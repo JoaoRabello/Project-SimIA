@@ -15,46 +15,57 @@ public abstract class Animal : MonoBehaviour, IMovable
     protected enum State { Nourished, Hungry, Thirsty, Horny, Danger }
 
     protected State state;
-    protected BiologicalSex sex;
 
-    protected NutritionManager nutritionManager;
     protected Rigidbody myRigidbody;
 
-    [Header("Resources Searching Attributes")]
+    [Header("Food")]
     public LayerMask foodMask;
-    public LayerMask dangerMask;
-    public LayerMask mateMask;
     public LayerMask treeMask;
-    public LayerMask waterMask;
-    public float foodViewRange;
-    public float dangerViewRange;
-    public float mateViewRange;
-    public float waterViewRange;
-    protected bool foodOnSight = false;
-    protected bool mateOnSight = false;
-    protected bool treeOnSight = false;
-    protected bool riverOnSight = false;
-    protected Tree tree;
+    protected NutritionManager nutritionManager;
     protected GameObject food;
-    protected GameObject water;
+    protected Tree tree;
 
+    public float foodViewRange;
+    protected bool foodOnSight = false;
+    protected bool treeOnSight = false;
+
+    [Header("Water")]
+    public LayerMask waterMask;
+    protected GameObject water;
+    
+    public float waterViewRange;
+    protected bool riverOnSight = false;
+
+    [Header("Reproduction")]
+    public BiologicalSex sex;
+    public LayerMask mateMask;
+    protected GameObject mate;
+    public Collider sexualOrgan;
+
+    public float mateViewRange;
+    protected bool mateOnSight = false;
+    protected bool isHorny = true;
+
+    [SerializeField] protected int maxReproductionUrge;
+    protected int reproductionUrge;
+    protected float reproductionUrgeRate;
+
+    [Header("Danger")]
+    public LayerMask dangerMask;
+    public float dangerViewRange;
+    protected Collider[] danger;
+
+    protected bool isRunningFromDanger = false;
+    protected Vector3 dangerRunAwayDestiny;
+
+    [Header("Movement")]
     public float speed;
     protected float actualSpeed;
     protected Vector3 randomDestiny;
-    protected Vector3 dangerRunAwayDestiny;
     protected bool canMove = true;
     protected bool canRandomWalk = true;
     protected bool isRandomWalking = false;
     protected bool randomStop = false;
-    protected Collider[] danger;
-    protected bool isRunningFromDanger = false;
-
-    protected bool isHorny = true;
-    protected int reproductionUrge; 
-    [SerializeField] protected int maxReproductionUrge; 
-    protected float reproductionUrgeRate;
-    protected GameObject mate;
-    public Collider sexualOrgan;
 
     private void Awake()
     {
