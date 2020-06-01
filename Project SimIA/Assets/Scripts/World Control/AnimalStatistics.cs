@@ -33,6 +33,18 @@ public class AnimalStatistics : MonoBehaviour
 
         monkeyAmountSlider.value = (monkeys.Count / initialMonkeyAmount);
         hawkAmountSlider.value = (hawks.Count / initialHawkAmount);
+
+        if(monkeys.Count == 0)
+        {
+            GuideEventObserver.Instance.ExtinguishAnimal(1);
+        }
+        else
+        {
+            if(hawks.Count == 0)
+            {
+                GuideEventObserver.Instance.ExtinguishAnimal(2);
+            }
+        }
     }
 
     public void AddAnimal(Monkey monkey)
