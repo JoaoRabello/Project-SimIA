@@ -23,6 +23,11 @@ public class Hawk : Carnivore
     {
         base.Update();
 
+        StateUpdate();
+    }
+
+    private void StateUpdate()
+    {
         switch (state)
         {
             case State.Nourished:
@@ -68,7 +73,7 @@ public class Hawk : Carnivore
                     }
                 }
                 break;
-            case State.Horny:
+            case State.Fertile:
                 if (mate == null)
                 {
                     if (!mateOnSight)
@@ -92,14 +97,6 @@ public class Hawk : Carnivore
 
         }
     }
-
-    //private void OnDrawGizmos()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawWireSphere(transform.position, foodViewRange);
-    //    Gizmos.color = Color.blue;
-    //    Gizmos.DrawWireSphere(transform.position, riverViewRange);
-    //}
 
     protected void NormalFly()
     {

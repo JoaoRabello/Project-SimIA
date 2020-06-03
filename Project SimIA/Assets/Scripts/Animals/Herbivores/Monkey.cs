@@ -21,6 +21,11 @@ public class Monkey : Herbivore
     {
         base.Update();
 
+        StateUpdate();
+    }
+
+    private void StateUpdate()
+    {
         if (!IsAtTree)
         {
             switch (state)
@@ -61,8 +66,8 @@ public class Monkey : Herbivore
                             MoveToThis(water.transform.position);
                     }
                     break;
-                case State.Horny:
-                    if(mate == null)
+                case State.Fertile:
+                    if (mate == null)
                     {
                         if (!mateOnSight)
                         {

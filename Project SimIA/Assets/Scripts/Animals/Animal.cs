@@ -12,7 +12,7 @@ public enum BiologicalSex
 
 public abstract class Animal : MonoBehaviour, IMovable
 {
-    protected enum State { Nourished, Hungry, Thirsty, Horny, Danger }
+    protected enum State { Nourished, Hungry, Thirsty, Fertile, Danger }
 
     protected State state;
 
@@ -106,7 +106,7 @@ public abstract class Animal : MonoBehaviour, IMovable
                 {
                     if (IsHorny())
                     {
-                        state = State.Horny;
+                        state = State.Fertile;
                     }
                     else
                     {
@@ -244,13 +244,13 @@ public abstract class Animal : MonoBehaviour, IMovable
                     }
                     mateOnSight = true;
                 }
-                Request(mate.GetComponentInParent<Animal>());
+                RequestReproduction(mate.GetComponentInParent<Animal>());
             }
             sexualOrgan.enabled = true;
         }
     }
 
-    public void Request(Animal mate)
+    public void RequestReproduction(Animal mate)
     {
         if (mate.IsHorny())
         {
