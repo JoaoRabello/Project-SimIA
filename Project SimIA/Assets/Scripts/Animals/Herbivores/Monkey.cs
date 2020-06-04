@@ -58,12 +58,19 @@ public class Monkey : Herbivore
                     if (water == null)
                     {
                         if (!riverOnSight)
+                        {
                             SearchRiver();
+                            print("procurando agua");
+                            NormalWalk();
+                        }
                     }
                     else
                     {
                         if (canMove)
+                        {
                             MoveToThis(water.transform.position);
+                            print("andando pra agua");
+                        }
                     }
                     break;
                 case State.Fertile:
@@ -162,9 +169,27 @@ public class Monkey : Herbivore
 
     private Vector3 GetRandomDestiny()
     {
-        return new Vector3(Mathf.Clamp(Random.Range(transform.position.x - 15, transform.position.x + 15), 0.5f, 155),
-                        0,
-                        Mathf.Clamp(Random.Range(transform.position.z - 15, transform.position.z + 15), 0.5f, 155));
+        bool isReady = false;
+        Vector3 destiny;
+        
+        do
+        {
+            destiny = new Vector3(Mathf.Clamp(Random.Range(transform.position.x - 15, transform.position.x + 15), 0.5f, 155),
+                                  0,
+                                  Mathf.Clamp(Random.Range(transform.position.z - 15, transform.position.z + 15), 0.5f, 155));
+            RaycastHit hit;
+            Ray ray = new Ray(transform.position, destiny);
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (!hit.collider.gameObject.CompareTag("River"))
+                {
+                    isReady = true;
+                }
+            }
+        }
+        while (!isReady);
+
+        return destiny;
     }
 
     private IEnumerator StartRandomWalk(Vector3 destiny)

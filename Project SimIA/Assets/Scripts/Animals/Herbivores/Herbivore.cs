@@ -41,16 +41,16 @@ public class Herbivore : Animal
     {
         Vector3 direction = new Vector3(destiny.x - transform.position.x, 0, destiny.z - transform.position.z);
         Vector3 moveDirection = direction.normalized;
-        
+
         //RaycastHit hit;
         //Ray ray = new Ray(transform.position, direction);
         //if (Physics.Raycast(ray, out hit))
         //{
-        //    if(hit.collider.gameObject.CompareTag("Ground"))
-        //    {
-        //        //TODO: Jump!
-        //        myRigidbody.AddForce(Vector3.up * Time.deltaTime * 10000, ForceMode.Force);
-        //    }
+        //    //if (hit.collider.gameObject.CompareTag("Ground"))
+        //    //{
+        //    //    //TODO: Jump!
+        //    //    myRigidbody.AddForce(Vector3.up * Time.deltaTime * 10000, ForceMode.Force);
+        //    //}
         //}
 
         Debug.DrawRay(transform.position, direction, Color.white);
@@ -141,7 +141,7 @@ public class Herbivore : Animal
 
     public void Die()
     {
-        AnimalStatistics.Instance.RemoveAnimal(GetComponent<Monkey>());
+        AnimalStatistics.Instance.RemoveAnimal(GetComponent<Monkey>(), DeathType.Hunt);
         foreach (Carnivore hunter in hunters)
         {
             hunter.StopHunting();

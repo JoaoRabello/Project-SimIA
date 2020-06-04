@@ -5,12 +5,23 @@ using UnityEngine;
 
 public class Fire : MonoBehaviour
 {
+    private static int fireCount = 0;
+
     public float heatRange;
     private float heatAmount = 2;
     public LayerMask treeLayerMask;
 
     private float timer; 
-    [SerializeField] private float timeToExtinguish = 20f; 
+    [SerializeField] private float timeToExtinguish = 20f;
+
+    private void Start()
+    {
+        if(fireCount == 0)
+        {
+            EventLogger.Instance.LogEvent(EventType.Fire);
+        }
+        fireCount++;
+    }
 
     void Update()
     {

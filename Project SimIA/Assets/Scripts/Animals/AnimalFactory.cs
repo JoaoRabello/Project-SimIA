@@ -147,7 +147,7 @@ public class AnimalFactory : MonoBehaviour
 
         var hawk = Instantiate(instance.babyHawk, mother.position, Quaternion.identity).GetComponent<BabyHawk>();
 
-        AnimalStatistics.Instance.AddAnimal(hawk);
+        AnimalStatistics.Instance.AddAnimal(hawk.matureHawk);
         hawk.Initialize(dna);
     }
 

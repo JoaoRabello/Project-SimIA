@@ -58,8 +58,8 @@ MonoBehaviour:
   foodViewRange: 10
   waterMask:
     serializedVersion: 2
-    m_Bits: 0
-  waterViewRange: 50
+    m_Bits: 512
+  waterViewRange: 15
   sex: 1
   mateMask:
     serializedVersion: 2
@@ -92,7 +92,7 @@ MonoBehaviour:
   maxNutrition: 20
   hungerIncreaseRate: 0.7
   maxHydration: 20
-  thirstIncreaseRate: 5
+  thirstIncreaseRate: 2
   nutririonSlider: {fileID: 0}
   hydrationSlider: {fileID: 0}
 --- !u!54 &1831340686281916615

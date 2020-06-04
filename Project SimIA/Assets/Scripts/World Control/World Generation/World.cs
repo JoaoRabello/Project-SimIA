@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class World : MonoBehaviour
 {
-    public int seed;
+    private int seed;
     private BiomeAttributes biome;
     public List<BiomeAttributes> biomes = new List<BiomeAttributes>();
+    public GameObject water;
 
     public Transform player;
     public Light sunLight;
@@ -26,7 +27,6 @@ public class World : MonoBehaviour
     private void Start()
     {
         seed = Random.Range(0, 50);
-        //Random.InitState(seed);
 
         SetBiome();
 
@@ -131,6 +131,7 @@ public class World : MonoBehaviour
         }
         
         GenerateVegetation();
+        GenerateWater();
 
         if(ConfigurationData.worldAnimalType == WorldAnimalType.DEFAULT)
         {
@@ -147,8 +148,6 @@ public class World : MonoBehaviour
     {
         int yPos = Mathf.FloorToInt(pos.y);
 
-        //Immutable Pass
-
         //If outside of the world, spawn air
         if (!IsVoxelInWorld(pos))
             return 0;
@@ -156,7 +155,6 @@ public class World : MonoBehaviour
         if (yPos == 0)
             return 1;
 
-        //Basic Terrain Pass
         int terrainHeight = Mathf.FloorToInt(biome.terrainHeight * Noise.Get2DPerlin(new Vector2(pos.x, pos.z), seed, biome.terrainScale)) + biome.solidGroundHeight;
         byte voxelValue;
 
@@ -186,7 +184,6 @@ public class World : MonoBehaviour
             }
         }
 
-        //Second Pass
         if(voxelValue == 2)
         {
             foreach (Lode lode in biome.lodes)
@@ -249,10 +246,31 @@ public class World : MonoBehaviour
         }
     }
 
+    private void GenerateWater()
+    {
+        for (int i = 0; i < VoxelData.worldSizeInChunks; i++)
+        {
+            for (int j = 0; j < VoxelData.worldSizeInChunks; j++)
+            {
+                for (int x = 0; x < chunks[i, j].waterPositions.Count; x++)
+                {
+                    if (Noise.Get2DPerlin(new Vector2(chunks[i, j].waterPositions[x].x, chunks[i, j].waterPositions[x].z), seed, biome.terrainScale) > 0.45f)
+                    {
+                        Instantiate(water, chunks[i, j].waterPositions[x], Quaternion.identity, transform);
+                    }
+                }
+            }
+        }
+    }
+
     private void SpawnAnimals()
     {
         Vector3 randomPos;
         int randomIndex;
+
+        int monkeyCount = 0;
+        int hawkCount = 0;
+
         for (int k = 0; k < biome.animals.Length; k++)
         {
             for (int i = 0; i < VoxelData.worldSizeInChunks; i++)
@@ -268,11 +286,13 @@ public class World : MonoBehaviour
                         {
                             case AnimalType.Monkey:
                                 AnimalFactory.CreateMonkey(5, 10, 50, randomPos, transform);
+                                monkeyCount++;
                                 break;
                             case AnimalType.Hawk:
                                 if (Random.Range(0, 100) > 70)
                                 {
                                     AnimalFactory.CreateHawk(3, 100, 200, new Vector3(randomPos.x, biome.terrainHeight + 20f, randomPos.z), transform);
+                                    hawkCount++;
                                 }
                                 break;
                         }
@@ -280,6 +300,9 @@ public class World : MonoBehaviour
                 }
             }
         }
+
+        AnimalStatistics.Instance.SetInitialMonkeyAmount(monkeyCount);
+        AnimalStatistics.Instance.SetInitialHawkAmount(hawkCount);
     }
 }
 
@@ -288,6 +311,7 @@ public class BlockType
 {
     public string blockName;
     public bool isSolid;
+    public bool isWater;
 
     [Header("Texture Values")]
     public int backFaceTexture;

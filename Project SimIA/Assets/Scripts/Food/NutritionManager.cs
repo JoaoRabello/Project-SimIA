@@ -78,13 +78,13 @@ namespace SurvivalManagers
         {
             if (animal.GetComponent<Monkey>())
             {
-                AnimalStatistics.Instance.RemoveAnimal(animal.GetComponent<Monkey>());
+                AnimalStatistics.Instance.RemoveAnimal(animal.GetComponent<Monkey>(), DeathType.Hunger);
             }
             else
             {
                 if (animal.GetComponent<Hawk>())
                 {
-                    AnimalStatistics.Instance.RemoveAnimal(animal.GetComponent<Hawk>());
+                    AnimalStatistics.Instance.RemoveAnimal(animal.GetComponent<Hawk>(), DeathType.Hunger);
                 }
             }
             Destroy(gameObject);

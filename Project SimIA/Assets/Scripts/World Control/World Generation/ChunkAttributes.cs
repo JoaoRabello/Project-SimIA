@@ -17,6 +17,7 @@ public class ChunkAttributes : MonoBehaviour
 
     public byte[,,] VoxelMap { get; private set; } = new byte[VoxelData.chunkWidth, VoxelData.chunkHeight, VoxelData.chunkWidth];
     public List<Vector3> voxelPositions = new List<Vector3>();
+    public List<Vector3> waterPositions = new List<Vector3>();
 
     private World world;
 
@@ -57,6 +58,13 @@ public class ChunkAttributes : MonoBehaviour
                     {
                         voxelPositions.Add(new Vector3(x + 0.5f, y + 1, z + 0.5f) + position);
                     }
+                    else
+                    {
+                        if(world.blockTypes[VoxelMap[x, y, z]].isWater)
+                        {
+                            waterPositions.Add(new Vector3(x + 0.5f, y + 2.5f, z + 0.5f) + position);
+                        }
+                    }
                 }
             }
         }
@@ -70,7 +78,7 @@ public class ChunkAttributes : MonoBehaviour
             {
                 for (int z = 0; z < VoxelData.chunkWidth; z++)
                 {
-                    if (world.blockTypes[VoxelMap[x, y, z]].isSolid)
+                    if (world.blockTypes[VoxelMap[x, y, z]].isSolid || world.blockTypes[VoxelMap[x, y, z]].isWater)
                         AddVoxelDataToChunk(new Vector3(x, y, z));
                 }
             }

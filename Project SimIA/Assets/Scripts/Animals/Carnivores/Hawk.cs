@@ -59,7 +59,10 @@ public class Hawk : Carnivore
                 if (water == null)
                 {
                     if (!riverOnSight)
+                    {
                         SearchRiver();
+                        NormalFly();
+                    }
                 }
                 else
                 {

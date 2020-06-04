@@ -192,8 +192,8 @@ public abstract class Animal : MonoBehaviour, IMovable
 
     protected void SearchRiver()
     {
-        Collider[] riverNextToThis = Physics.OverlapSphere(transform.position, waterViewRange, waterMask);
-        bool isRiverNext = riverNextToThis.Length > 0;
+        Collider[] waterNextToThis = Physics.OverlapSphere(transform.position, waterViewRange, waterMask);
+        bool isRiverNext = waterNextToThis.Length > 0;
 
         if (!isRiverNext)
         {
@@ -201,11 +201,23 @@ public abstract class Animal : MonoBehaviour, IMovable
         }
         else
         {
-            if (riverNextToThis[0] != null)
+            float smallerDistance = 10000;
+            foreach (var waterObject in waterNextToThis)
             {
-                water = riverNextToThis[0].gameObject;
-                riverOnSight = true;
+                float distance = Vector3.Distance(transform.position, waterObject.transform.position);
+
+                if (distance < smallerDistance)
+                {
+                    smallerDistance = distance;
+                    this.water = waterObject.gameObject;
+                    riverOnSight = true;
+                }
             }
+            //if (riverNextToThis[0] != null)
+            //{
+            //    water = riverNextToThis[0].gameObject;
+            //    riverOnSight = true;
+            //}
         }
     }
 

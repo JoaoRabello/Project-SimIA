@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BabyHawk : Hawk
 {
-    [SerializeField] private Hawk matureHawk;
+    public Hawk matureHawk;
 
     private HawkDNA babyDNA = new HawkDNA();
     private float timeToMature = 5;

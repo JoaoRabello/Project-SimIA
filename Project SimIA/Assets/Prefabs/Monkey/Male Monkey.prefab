@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1831340686281916615}
   - component: {fileID: 1831340686281916614}
   m_Layer: 10
-  m_Name: Monkey
+  m_Name: Male Monkey
   m_TagString: Herbivore
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,25 +52,26 @@ MonoBehaviour:
   foodMask:
     serializedVersion: 2
     m_Bits: 256
-  dangerMask:
-    serializedVersion: 2
-    m_Bits: 135168
-  mateMask:
-    serializedVersion: 2
-    m_Bits: 32768
   treeMask:
     serializedVersion: 2
     m_Bits: 2048
+  foodViewRange: 10
   waterMask:
     serializedVersion: 2
-    m_Bits: 0
-  foodViewRange: 10
-  dangerViewRange: 10
-  mateViewRange: 15
-  waterViewRange: 50
-  speed: 5
-  maxReproductionUrge: 500
+    m_Bits: 512
+  waterViewRange: 15
+  sex: 0
+  mateMask:
+    serializedVersion: 2
+    m_Bits: 32768
   sexualOrgan: {fileID: 1129695560979300334}
+  mateViewRange: 15
+  maxReproductionUrge: 500
+  dangerMask:
+    serializedVersion: 2
+    m_Bits: 135168
+  dangerViewRange: 10
+  speed: 5
   fatAmount: 10
   groundLayerMask:
     serializedVersion: 2
@@ -91,7 +92,7 @@ MonoBehaviour:
   maxNutrition: 20
   hungerIncreaseRate: 0.7
   maxHydration: 20
-  thirstIncreaseRate: 5
+  thirstIncreaseRate: 2
   nutririonSlider: {fileID: 0}
   hydrationSlider: {fileID: 0}
 --- !u!54 &1831340686281916615
