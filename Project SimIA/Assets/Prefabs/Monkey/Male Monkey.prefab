@@ -92,7 +92,7 @@ MonoBehaviour:
   maxNutrition: 20
   hungerIncreaseRate: 0.7
   maxHydration: 20
-  thirstIncreaseRate: 2
+  thirstIncreaseRate: 0.6
   nutririonSlider: {fileID: 0}
   hydrationSlider: {fileID: 0}
 --- !u!54 &1831340686281916615

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class DNA
 {
@@ -30,24 +31,53 @@ public class MonkeyDNA : DNA
 
 public class HawkDNA : DNA
 {
-    public const float FAT_AMOUNT_MAX = 100f;
-    public const float FAT_AMOUNT_MIN = 10f;
-    public float fatAmount;
+    public const float FLYBY_SPEEDRATE_MAX = 4f;
+    public const float FLYBY_SPEEDRATE_MIN = 2f;
+    public float flybySpeedRate;
+}
+
+public class Crossover
+{
+    public float Cross(float motherGene, float fatherGene)
+    {
+        byte[] gene = new byte[4];
+        byte[] motherGeneByte = BitConverter.GetBytes(motherGene);
+        byte[] fatherGeneByte = BitConverter.GetBytes(fatherGene);
+        
+        int midpoint = UnityEngine.Random.Range(0,6);
+        
+        for(int i = 0; i < 4; i++)
+        {
+            if(i <= midpoint)
+            {
+                Debug.Log(i);
+                gene[i] = motherGeneByte[i];
+            }
+            else
+            {
+                Debug.Log(i);
+                gene[i] = fatherGeneByte[i];
+            }
+        }
+
+        Debug.Log(BitConverter.ToSingle(gene, 0));
+        return BitConverter.ToSingle(gene, 0);
+    }
 }
 
 public class Mutation
 {
     private const float MUTATION_MAX = 2;
-    private const float MUTATION_MIN = -10;
+    private const float MUTATION_MIN = -2;
 
     public int mutationChance = 70;
     public int sexChance = 50;
 
-    public float MutateGene(float gene)
+    public float MutateGene(float gene, float min, float max)
     {
-        if (Random.Range(0, 100) > mutationChance)
+        if (UnityEngine.Random.Range(0, 100) > mutationChance)
         {
-            return gene + Random.Range(0, MUTATION_MAX);
+            return Clamp(gene + UnityEngine.Random.Range(MUTATION_MIN, MUTATION_MAX), min, max);
         }
         else
         {
@@ -57,7 +87,7 @@ public class Mutation
 
     public BiologicalSex RandomizeSex()
     {
-        if (Random.Range(0, 100) > sexChance)
+        if (UnityEngine.Random.Range(0, 100) > sexChance)
         {
             return BiologicalSex.Male;
         }

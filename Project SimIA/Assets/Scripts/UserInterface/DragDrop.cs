@@ -55,7 +55,7 @@ public class DragDrop : MonoBehaviour, IEndDragHandler, IBeginDragHandler, IDrag
             {
                 if (itemToSpawn.GetComponent<Hawk>())
                 {
-                    AnimalFactory.CreateHawk(3, 100, 200, new Vector3(worldPos.x, worldPos.y + 5f, worldPos.z), itemToSpawn.GetComponent<Hawk>().sex);
+                    AnimalFactory.CreateHawk(3, 100, 200, 2, new Vector3(worldPos.x, worldPos.y + 5f, worldPos.z), itemToSpawn.GetComponent<Hawk>().sex);
                     GuideEventObserver.Instance.FirstAnimalSpawn();
                 }
                 else

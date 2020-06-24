@@ -614,10 +614,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 1245939350}
   cameraRotation: {x: 0, y: 0, z: 0, w: 0}
-  zoomAmount: {x: -10, y: 10, z: -10}
+  zoomAmount: {x: -5, y: 5, z: -5}
   rotationAmount: 1
-  rotationSpeed: 4
-  zoomSpeed: 1
+  rotationSpeed: 3
+  zoomSpeed: 3.5
+  movementSpeed: 5
+  dragStartPosition: {x: 0, y: 0, z: 0}
+  dragCurrentPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1005879844 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2588851463766239655, guid: bb88b7fc6adff004c877e3b6b7fd86d5,

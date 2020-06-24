@@ -302,25 +302,26 @@ MonoBehaviour:
   foodMask:
     serializedVersion: 2
     m_Bits: 4096
-  dangerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  mateMask:
-    serializedVersion: 2
-    m_Bits: 0
   treeMask:
     serializedVersion: 2
     m_Bits: 2048
+  foodViewRange: 100
   waterMask:
     serializedVersion: 2
     m_Bits: 512
-  foodViewRange: 100
-  dangerViewRange: 0
-  mateViewRange: 20
   waterViewRange: 200
-  speed: 3
-  maxReproductionUrge: 0
+  sex: 0
+  mateMask:
+    serializedVersion: 2
+    m_Bits: 0
   sexualOrgan: {fileID: 0}
+  mateViewRange: 20
+  maxReproductionUrge: 0
+  dangerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  dangerViewRange: 0
+  speed: 3
   matureHawk: {fileID: 458447543586441238, guid: cc53087c17a45f2448056e76217b856c,
     type: 3}
 --- !u!114 &2992184077831197158
@@ -338,7 +339,7 @@ MonoBehaviour:
   maxNutrition: 20
   hungerIncreaseRate: 2
   maxHydration: 20
-  thirstIncreaseRate: 5
+  thirstIncreaseRate: 2
   nutririonSlider: {fileID: 458447543445072449, guid: cc53087c17a45f2448056e76217b856c,
     type: 3}
   hydrationSlider: {fileID: 458447544547173271, guid: cc53087c17a45f2448056e76217b856c,

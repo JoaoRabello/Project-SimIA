@@ -16,9 +16,6 @@ namespace SurvivalManagers
         private float actualThirst;
         private bool isThirsty = true;
 
-        public Slider nutririonSlider;
-        public Slider hydrationSlider;
-
         private void Start()
         {
             actualHunger = maxNutrition;

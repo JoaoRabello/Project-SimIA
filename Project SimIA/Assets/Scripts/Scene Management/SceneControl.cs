@@ -7,6 +7,7 @@ public class SceneControl : MonoBehaviour
 {
     public void StartRandomWorld()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(1);
     }
 

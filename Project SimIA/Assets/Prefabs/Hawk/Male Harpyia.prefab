@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 458447543586441232}
   - component: {fileID: 458447543586441233}
   m_Layer: 12
-  m_Name: Harpyia
+  m_Name: Male Harpyia
   m_TagString: Carnivore
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,25 +51,26 @@ MonoBehaviour:
   foodMask:
     serializedVersion: 2
     m_Bits: 1024
-  dangerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  mateMask:
-    serializedVersion: 2
-    m_Bits: 65536
   treeMask:
     serializedVersion: 2
     m_Bits: 2048
+  foodViewRange: 100
   waterMask:
     serializedVersion: 2
     m_Bits: 512
-  foodViewRange: 100
-  dangerViewRange: 0
-  mateViewRange: 20
   waterViewRange: 200
-  speed: 3
-  maxReproductionUrge: 1000
+  sex: 0
+  mateMask:
+    serializedVersion: 2
+    m_Bits: 65536
   sexualOrgan: {fileID: 6365793238117426100}
+  mateViewRange: 20
+  maxReproductionUrge: 1000
+  dangerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  dangerViewRange: 0
+  speed: 3
 --- !u!114 &458447543586441232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,7 +86,7 @@ MonoBehaviour:
   maxNutrition: 20
   hungerIncreaseRate: 2
   maxHydration: 20
-  thirstIncreaseRate: 5
+  thirstIncreaseRate: 2
   nutririonSlider: {fileID: 0}
   hydrationSlider: {fileID: 0}
 --- !u!54 &458447543586441233

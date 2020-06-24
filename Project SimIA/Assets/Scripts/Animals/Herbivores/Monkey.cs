@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Monkey : Herbivore
 {
-    protected MonkeyDNA dna;
+    public MonkeyDNA dna;
 
     public void Initialize(MonkeyDNA dna)
     {
@@ -60,7 +60,6 @@ public class Monkey : Herbivore
                         if (!riverOnSight)
                         {
                             SearchRiver();
-                            print("procurando agua");
                             NormalWalk();
                         }
                     }
@@ -69,7 +68,6 @@ public class Monkey : Herbivore
                         if (canMove)
                         {
                             MoveToThis(water.transform.position);
-                            print("andando pra agua");
                         }
                     }
                     break;
@@ -240,8 +238,14 @@ public class Monkey : Herbivore
 
     private void Reproduce()
     {
-        AnimalFactory.CreateBabyMonkey(dna, mate.transform);
-       
+        if (sex == BiologicalSex.Female)
+        {
+            for (int i = 0; i < Random.Range(1, 4); i++)
+            {
+                AnimalFactory.CreateBabyMonkey(dna, mate.GetComponent<Monkey>().dna, transform);
+            }
+        }
+
         mate = null;
         mateOnSight = false;
         reproductionUrge = 0;

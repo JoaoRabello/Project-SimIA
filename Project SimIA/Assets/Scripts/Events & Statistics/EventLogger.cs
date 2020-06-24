@@ -46,6 +46,13 @@ public class EventLogger : MonoBehaviour
     {
         Instance = this;
         startTime = Time.time;
+        StartSimulation();
+    }
+
+    public void StartSimulation()
+    {
+        Time.timeScale = 1;
+        hasSimulationEnded = false;
     }
 
     public void LogEvent(EventType type)
@@ -72,7 +79,7 @@ public class EventLogger : MonoBehaviour
 
     public void EndSimulation()
     {
-        if (!hasSimulationEnded)
+        if (!hasSimulationEnded && ConfigurationData.worldAnimalType == WorldAnimalType.DEFAULT)
         {
             endTime = Time.time;
             totalTime = endTime - startTime;

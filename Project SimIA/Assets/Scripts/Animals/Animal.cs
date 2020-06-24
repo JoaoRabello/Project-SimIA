@@ -213,11 +213,6 @@ public abstract class Animal : MonoBehaviour, IMovable
                     riverOnSight = true;
                 }
             }
-            //if (riverNextToThis[0] != null)
-            //{
-            //    water = riverNextToThis[0].gameObject;
-            //    riverOnSight = true;
-            //}
         }
     }
 
@@ -264,7 +259,7 @@ public abstract class Animal : MonoBehaviour, IMovable
 
     public void RequestReproduction(Animal mate)
     {
-        if (mate.IsHorny())
+        if (mate.IsHorny() && mate.mate == null)
         {
             mate.mate = this.gameObject;
         }

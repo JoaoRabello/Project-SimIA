@@ -5,8 +5,9 @@ using UnityEngine;
 public class Hawk : Carnivore
 {
     private int flybyCount;
+    private float flybySpeedRate;
     
-    protected HawkDNA dna;
+    public HawkDNA dna;
 
     public void Initialize(HawkDNA dna)
     {
@@ -15,6 +16,7 @@ public class Hawk : Carnivore
         speed = dna.speed;
         foodViewRange = dna.foodViewRange;
         waterViewRange = dna.waterViewRange;
+        flybySpeedRate = dna.flybySpeedRate;
 
         sex = dna.sex;
     }
@@ -126,7 +128,7 @@ public class Hawk : Carnivore
     {
         if (flybyCount == 0)
         {
-            actualSpeed *= 3;
+            actualSpeed *= flybySpeedRate;
             flybyCount++;
         }
         if (preyToHunt != null)
@@ -140,7 +142,7 @@ public class Hawk : Carnivore
     {
         if(flybyCount == 0)
         {
-            actualSpeed *= 3;
+            actualSpeed *= flybySpeedRate;
             flybyCount++;
         }
         if (river)
@@ -177,7 +179,8 @@ public class Hawk : Carnivore
 
     private void Reproduce()
     {
-        AnimalFactory.CreateBabyHawk(dna, mate.transform);
+        if(sex == BiologicalSex.Female)
+            AnimalFactory.CreateBabyHawk(dna, mate.GetComponent<Hawk>().dna, transform);
 
         mate = null;
         mateOnSight = false;

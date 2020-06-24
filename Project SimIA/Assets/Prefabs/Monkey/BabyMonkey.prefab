@@ -129,31 +129,34 @@ MonoBehaviour:
   foodMask:
     serializedVersion: 2
     m_Bits: 256
-  dangerMask:
-    serializedVersion: 2
-    m_Bits: 135168
-  mateMask:
-    serializedVersion: 2
-    m_Bits: 0
   treeMask:
     serializedVersion: 2
     m_Bits: 2048
+  foodViewRange: 10
   waterMask:
     serializedVersion: 2
     m_Bits: 16
-  foodViewRange: 10
-  dangerViewRange: 0
-  mateViewRange: 0
   waterViewRange: 50
-  speed: 6
-  maxReproductionUrge: 0
+  sex: 0
+  mateMask:
+    serializedVersion: 2
+    m_Bits: 0
   sexualOrgan: {fileID: 0}
+  mateViewRange: 0
+  maxReproductionUrge: 0
+  dangerMask:
+    serializedVersion: 2
+    m_Bits: 135168
+  dangerViewRange: 0
+  speed: 6
   fatAmount: 1
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 16384
   gravityScale: 60
-  matureMonkey: {fileID: 1831340686281916613, guid: 71b7e8a39f450844d8da78e14051e517,
+  matureMaleMonkey: {fileID: 1831340686281916613, guid: 71b7e8a39f450844d8da78e14051e517,
+    type: 3}
+  matureFemaleMonkey: {fileID: 1831340686281916613, guid: a897911aa261d3b49a66860e4cffeff9,
     type: 3}
 --- !u!114 &2775236086934285355
 MonoBehaviour:
@@ -170,7 +173,7 @@ MonoBehaviour:
   maxNutrition: 20
   hungerIncreaseRate: 0.7
   maxHydration: 20
-  thirstIncreaseRate: 5
+  thirstIncreaseRate: 0.6
   nutririonSlider: {fileID: 0}
   hydrationSlider: {fileID: 0}
 --- !u!54 &2775236086934285332

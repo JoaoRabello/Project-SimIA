@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class BabyMonkey : Monkey
 {
-    public Monkey matureMonkey;
+    public Monkey matureMaleMonkey;
+    public Monkey matureFemaleMonkey;
 
     private MonkeyDNA babyDNA = new MonkeyDNA();
     private float timeToMature = 5;
 
     public new void Initialize(MonkeyDNA dna)
     {
+        print(dna.sex);
+        print(babyDNA.sex);
         babyDNA = dna;
 
         speed = dna.speed;
@@ -67,8 +70,17 @@ public class BabyMonkey : Monkey
     private IEnumerator Maturation()
     {
         yield return new WaitForSeconds(timeToMature);
+        Monkey monkey;
 
-        var monkey = Instantiate(matureMonkey, transform.position, Quaternion.identity);
+        if(babyDNA.sex == BiologicalSex.Male)
+        {
+            monkey = Instantiate(matureMaleMonkey, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            monkey = Instantiate(matureFemaleMonkey, transform.position, Quaternion.identity);
+        }
+        
         monkey.Initialize(babyDNA);
 
         Destroy(gameObject);

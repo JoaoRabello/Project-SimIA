@@ -17,19 +17,53 @@ public class UserCamera : MonoBehaviour
     public float rotationSpeed;
     public float zoomSpeed;
 
+    public float movementSpeed;
+    private Vector3 newPosition;
+    public Vector3 dragStartPosition;
+    public Vector3 dragCurrentPosition;
+
     void Start()
     {
         newZoom = cameraTransform.localPosition;
         newRotation = transform.rotation;
+        newPosition = new Vector3(+80, 5, +80);
     }
 
     void Update()
     {
         InputHandler();
 
+        if (Input.GetMouseButtonDown(2))
+        {
+            Plane plane = new Plane(Vector3.up, Vector3.zero);
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            float entry;
+
+            if (plane.Raycast(ray, out entry))
+            {
+                dragStartPosition = ray.GetPoint(entry);
+            }
+        }
+        if (Input.GetMouseButton(2))
+        {
+            Plane plane = new Plane(Vector3.up, Vector3.zero);
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            float entry;
+
+            if (plane.Raycast(ray, out entry))
+            {
+                dragCurrentPosition = ray.GetPoint(entry);
+                newPosition = transform.position + dragStartPosition - dragCurrentPosition;
+            }
+        }
+
         transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * rotationSpeed);
         cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, newZoom, Time.deltaTime * zoomSpeed);
-
+        transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * movementSpeed);
     }
 
     private void InputHandler()
@@ -46,7 +80,7 @@ public class UserCamera : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.Mouse2))
+        if (Input.GetKey(KeyCode.Mouse1))
             isRotating = true;
         else
             isRotating = false;

@@ -254,7 +254,7 @@ public class World : MonoBehaviour
             {
                 for (int x = 0; x < chunks[i, j].waterPositions.Count; x++)
                 {
-                    if (Noise.Get2DPerlin(new Vector2(chunks[i, j].waterPositions[x].x, chunks[i, j].waterPositions[x].z), seed, biome.terrainScale) > 0.45f)
+                    if (Noise.Get2DPerlin(new Vector2(chunks[i, j].waterPositions[x].x, chunks[i, j].waterPositions[x].z), seed, biome.terrainScale) > 0.46f)
                     {
                         Instantiate(water, chunks[i, j].waterPositions[x], Quaternion.identity, transform);
                     }
@@ -280,7 +280,7 @@ public class World : MonoBehaviour
                     randomIndex = chunks[i, j].voxelPositions.Count - Random.Range(1, VoxelData.chunkWidth);
                     randomPos = chunks[i, j].voxelPositions[randomIndex];
 
-                    if (IsVoxelInWorld(randomPos) && Noise.Get2DPerlin(new Vector2(randomPos.x, randomPos.z), seed, biome.terrainScale) > 0.7f)
+                    if (IsVoxelInWorld(randomPos) && Noise.Get2DPerlin(new Vector2(randomPos.x, randomPos.z), seed, biome.terrainScale) > 0.65f)
                     {
                         switch (biome.animals[k])
                         {
@@ -289,9 +289,9 @@ public class World : MonoBehaviour
                                 monkeyCount++;
                                 break;
                             case AnimalType.Hawk:
-                                if (Random.Range(0, 100) > 70)
+                                if(hawkCount < 5)
                                 {
-                                    AnimalFactory.CreateHawk(3, 100, 200, new Vector3(randomPos.x, biome.terrainHeight + 20f, randomPos.z), transform);
+                                    AnimalFactory.CreateHawk(3, 100, 200, 3, new Vector3(randomPos.x, biome.terrainHeight + 20f, randomPos.z), transform);
                                     hawkCount++;
                                 }
                                 break;
